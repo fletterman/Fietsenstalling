@@ -1,9 +1,18 @@
 [
   {
-    'bezet': true,
-    'kaartNummer': '1'
-
+    "bezet": true,
+    "kaartNummer": 4,
+    "stallingsJaar": 2019,
+    "stallingsMaand": 10,
+    "stallingsDag": 28,
+    "stallingsUur": 2,
+    "stallingsMinuut": 7
 },{
     "bezet": true,
-    "kaartNummer": "2"
+    "kaartNummer": 8,
+    "stallingsJaar": 2019,
+    "stallingsMaand": 9,
+    "stallingsDag": 13,
+    "stallingsUur": 2,
+    "stallingsMinuut": 7
 }]
