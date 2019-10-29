@@ -8,7 +8,7 @@ beheerder = 111
 
 def kluisCheck(getal):
     legeKluizen = 0
-    kaartNummer = int(input("Welke kluisnummer is van u?"))
+    kaartNummer = int(input("Welke kaartnummer is van u?"))
     if getal == 1:
         for x in kluisjes:
             if kaartNummer == x['kaartNummer']:
