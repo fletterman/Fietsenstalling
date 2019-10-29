@@ -43,14 +43,5 @@
         "stallingsDag": 29,
         "stallingsUur": 11,
         "stallingsMinuut": 26
-    },
-    {
-        "bezet": true,
-        "kaartNummer": 2,
-        "stallingsJaar": 2019,
-        "stallingsMaand": 10,
-        "stallingsDag": 29,
-        "stallingsUur": 11,
-        "stallingsMinuut": 39
     }
 ]
