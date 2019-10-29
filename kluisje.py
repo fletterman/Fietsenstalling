@@ -2,16 +2,23 @@
 import json, datetime
 # from tkinter import *
 
-def nieuweKluis():
+vandaag = datetime.datetime.today()
+beheerder = 111
+
+def nieuweKluis(kaartNummer):
     with open("fietsenstallingen.json", 'r', encoding='utf-8') as infile:
         kluisjes = json.load(infile)
     print(kluisjes)
+    bezet = True
+    kaartNummer = kaartNummer
+    stallingsJaar = vandaag.strftime('%Y')
+    stallingsMaand
 
 def totaalMinuten(stallingsJaar, stallingsMaand, stallingsDag, stallingsUur, stallingsMinuut):
+    pass
 
 def stallingsTijd(stallingsDatum):
     som = 0
-    vandaag = datetime.datetime.today()
     dagenInMaanden = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
     maanden = {"Jan": 1, "Feb": 2, "Mar": 3, "Apr": 4, "May": 5, "Jun": 6, "Jul": 7, "Aug": 8, "Sep": 9, "Oct": 10, "Nov": 11, "Dec": 12}
     huidigeMaand, huidigeDag, huidigeJaar, huidigeUur, huidigeMinuut = vandaag.strftime('%b'), vandaag.strftime('%d'), vandaag.strftime('%Y'), vandaag.strftime("%H"), vandaag.strftime('%M')
@@ -23,7 +30,7 @@ def stallingsTijd(stallingsDatum):
     antHuidigeMinuten = (((som + int(huidigeJaar) * 365 + int(huidigeJaar) // 4) * 24 + int(huidigeDag)) * 60 + int(huidigeMinuut)) #ant jaar * 365 + 1 dag per vier hele jaren + ant dagen in huidige jaar
     print(antHuidigeMinuten)
     print(huidigeJaar, huidigeMaandNummer, huidigeDag, huidigeUur, huidigeMinuut)
-beheerder = 111
+
 while True:
     legeKluizen = 0
     kaartNummer = int(input('Wat is uw kaartnummer?'))
