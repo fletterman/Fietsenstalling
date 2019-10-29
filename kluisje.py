@@ -4,6 +4,8 @@ import json, datetime
 
 vandaag = datetime.datetime.today()
 beheerder = 111
+standaardPrijsUur = 0.30
+standaardPrijsMinuut = standaardPrijsUur / 60
 # legeKluizen = 0
 
 def kluisCheck(getal):
@@ -47,7 +49,7 @@ def huidigePrijs(kaartNummer):
             huidigeMinuten = totaalMinuten(huidigeDatum())
             print(huidigeMinuten)
             print(totaalMinuten(x))
-            prijs = huidigeMinuten - totaalMinuten(x)
+            prijs = (huidigeMinuten - totaalMinuten(x)) * standaardPrijsMinuut
             return prijs
 
 def totaalMinuten(datumDictionary):
@@ -87,8 +89,8 @@ while True:
         print(kluisjes[kluisNummer])
         continue
     elif optieGui == 222:
-        kaartNummer = int(input("wat is uw kluisnummer?"))
-        print(huidigePrijs(kaartNummer))
+        kaartNummer = int(input("wat is uw kaartnummer?"))
+        print("Uw prijs is: ", huidigePrijs(kaartNummer))
         continue
     elif optieGui == 333:
         nieuweKluis()
