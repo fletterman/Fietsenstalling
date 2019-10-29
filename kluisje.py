@@ -18,6 +18,7 @@ def stallingsTijd(stallingsDatum):
     print(huidigeJaar, huidigeMaandNummer, huidigeDag, huidigeUur, huidigeMinuut)
 beheerder = 111
 while True:
+    legeKluizen = 0
     kaartNummer = int(input('Wat is uw kaartnummer?'))
     with open("fietsenstallingen.json", 'r', encoding='utf-8') as infile:
         kluisjes = json.load(infile)
@@ -37,4 +38,6 @@ while True:
             print(kluisjes.index(x) + 1)
             break
         else:
-            print("U heeft geen kluis in gebruik")
+            legeKluizen += 1
+            if legeKluizen == len(kluisjes):
+                print("U heeft geen kluis in gebruik")
