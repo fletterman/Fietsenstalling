@@ -1,11 +1,9 @@
 #basis
-import json
-import datetime
 from tkinter import *
 def stallingsTijd(stallingsDatum):
     som = 0
     vandaag = datetime.datetime.today()
-    dagenInMaanden = [31, 28, 31, 30, 31, 30, 31, 31,30, 31, 30, 31]
+    dagenInMaanden = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
     maanden = {"Jan": 1, "Feb": 2, "Mar": 3, "Apr": 4, "May": 5, "Jun": 6, "Jul": 7, "Aug": 8, "Sep": 9, "Oct": 10, "Nov": 11, "Dec": 12}
     huidigeMaand, huidigeDag, huidigeJaar, huidigeUur, huidigeMinuut = vandaag.strftime('%b'), vandaag.strftime('%d'), vandaag.strftime('%Y'), vandaag.strftime("%H"), vandaag.strftime('%M')
     huidigeMaandNummer = maanden[huidigeMaand]
