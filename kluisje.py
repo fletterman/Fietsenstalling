@@ -73,7 +73,7 @@ def huidigeDatum():
 
 while True:
     legeKluizen = 0
-    optieGui = int(input(' 222 = huidigeprijs berekenen, 333 = nieuwe kluis, 444 = kluis inleveren', ))
+    optieGui = int(input('111 = Beheerder, 222 = huidigeprijs berekenen, 333 = nieuwe kluis, 444 = kluis inleveren', ))
     with open("fietsenstallingen.json", 'r', encoding='utf-8') as infile:
         kluisjes = json.load(infile)
     if optieGui == beheerder:
