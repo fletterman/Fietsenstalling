@@ -40,6 +40,10 @@ def nieuweKluis():
     resultaat = "U heeft kluisje: {}".format(len(kluisjes))
     with open("fietsenstallingen.json", 'w', encoding='utf-8') as outfile:
         json.dump(kluisjes, outfile, ensure_ascii=False, indent=4)
+    return resultaat
+
+def kluisInleveren():
+
 
 def huidigePrijs(kaartNummer):
     with open("fietsenstallingen.json", 'r', encoding='utf-8') as infile:
