@@ -1,7 +1,12 @@
 #basis
 import json, datetime
 from tkinter import *
-from tkinter.messagebox import showinfo
+
+def clicked():
+    bericht = 'Dit een bericht voor de gebruiker!'
+    showinfo(title='popup', message=bericht)
+
+
 
 
 
@@ -98,9 +103,20 @@ def huidigeDatum():
     }
     return datumDictionary
 
+root = Tk()
+button = Button(master=root, text='Druk hier', command=clicked)
+button.pack(pady=10)
+
+root.mainloop()
+
 while True:
     legeKluizen = 0
-    optieGui = int(input('111 = Beheerder, 222 = huidigeprijs berekenen, 333 = nieuwe kluis, 444 = kluis inleveren, 555 = resterende tijd berekenen'))
+    optieGui = ""
+    optieGuiString = input('111 = Beheerder, 222 = huidigeprijs berekenen, 333 = nieuwe kluis, 444 = kluis inleveren, 555 = resterende tijd berekenen')
+    if optieGuiString == 'q':
+        break
+    else:
+        optieGui = int(optieGuiString)
     with open("fietsenstallingen.json", 'r', encoding='utf-8') as infile:
         kluisjes = json.load(infile)
     if optieGui == beheerder:
@@ -132,6 +148,8 @@ while True:
         else:
             print('U komt:', resterendSaldo, 'tekort.')
         continue
+    elif optieGui == "q":
+        False
     for x in kluisjes:
         if optieGui == x['kaartNummer']:
             print(kluisjes.index(x) + 1)
@@ -140,15 +158,6 @@ while True:
             legeKluizen += 1
             if legeKluizen == len(kluisjes):
                 print("U heeft geen kluis in gebruik")
-    elif kaartNummer == "q":
-        False
 
-# def clicked():
-#     bericht = 'Dit een bericht voor de gebruiker!'
-#     showinfo(title='popup', message=bericht)
-#
-# root = Tk()
-# button = Button(master=root, text='Druk hier', command=clicked)
-# button.pack(pady=10)
-#
-# root.mainloop()
+
+
