@@ -38,6 +38,7 @@ def nieuweKluis():
     resultaat = "U heeft kluisje: {}".format(len(kluisjes))
     with open("fietsenstallingen.json", 'w', encoding='utf-8') as outfile:
         json.dump(kluisjes, outfile, ensure_ascii=False, indent=4)
+
 def huidigePrijs(kaartNummer):
     with open("fietsenstallingen.json", 'r', encoding='utf-8') as infile:
         kluisjes = json.load(infile)
@@ -48,12 +49,13 @@ def huidigePrijs(kaartNummer):
             print(totaalMinuten(x))
             prijs = huidigeMinuten - totaalMinuten(x)
             return prijs
+
 def totaalMinuten(datumDictionary):
     som = 0
     dagenInMaanden = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
     for index in range(datumDictionary['stallingsMaand'] + 1):
         som += dagenInMaanden[index]
-    antMinuten = (((som + datumDictionary['stallingsJaar'] * 365 + datumDictionary['stallingsJaar'] // 4) * 24 + datumDictionary['stallingsDag']) * 60 + datumDictionary['stallingsMinuut'])  # ant jaar * 365 + 1 dag per vier hele jaren + ant dagen in huidige jaar
+    antMinuten = ((((som + datumDictionary['stallingsJaar'] * 365 + datumDictionary['stallingsJaar'] // 4) + datumDictionary['stallingsDag']) * 24 + datumDictionary["stallingsUur"]) * 60 + datumDictionary['stallingsMinuut'])  # ant jaar * 365 + 1 dag per vier hele jaren + ant dagen in huidige jaar
     return antMinuten
 
 def huidigeDatum():
