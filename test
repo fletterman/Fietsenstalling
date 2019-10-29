@@ -1,0 +1,9 @@
+Hoe bereken je het beste de tijd tussen twee data?
+2019 10 28 13 59
+Jaar Maand Dag Uur Minuut
+
+2018 7 21 12 15
+Jaar Maand Dag Uur Minuut
+
+Terugvallen op common denominator? Alles verwerken naar minuut?
+2018 *12 + 7 = antMaanden
