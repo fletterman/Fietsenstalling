@@ -43,7 +43,7 @@ def nieuweKluis():
     return resultaat
 
 def kluisInleveren():
-
+    pass
 
 def huidigePrijs(kaartNummer):
     with open("fietsenstallingen.json", 'r', encoding='utf-8') as infile:
