@@ -44,16 +44,12 @@ def nieuweKluis():
 
 def kluisInleveren():
     pass
-
 def huidigePrijs(kaartNummer):
     with open("fietsenstallingen.json", 'r', encoding='utf-8') as infile:
         kluisjes = json.load(infile)
     for x in kluisjes:
         if kaartNummer == x["kaartNummer"]:
-            huidigeMinuten = totaalMinuten(huidigeDatum())
-            print(huidigeMinuten)
-            print(totaalMinuten(x))
-            prijs = (huidigeMinuten - totaalMinuten(x)) * standaardPrijsMinuut
+            prijs = (totaalMinuten(huidigeDatum()) - totaalMinuten(x)) * standaardPrijsMinuut
             return prijs
 
 def totaalMinuten(datumDictionary):
@@ -81,7 +77,7 @@ def huidigeDatum():
 
 while True:
     legeKluizen = 0
-    optieGui = int(input('111 = Beheerder, 222 = huidigeprijs berekenen, 333 = nieuwe kluis, 444 = kluis inleveren', ))
+    optieGui = int(input('111 = Beheerder, 222 = huidigeprijs berekenen, 333 = nieuwe kluis, 444 = kluis inleveren, 555 = resterende tijd berekenen'))
     with open("fietsenstallingen.json", 'r', encoding='utf-8') as infile:
         kluisjes = json.load(infile)
     if optieGui == beheerder:
@@ -101,6 +97,16 @@ while True:
         continue
     elif optieGui == 444:
         pass
+    elif optieGui == 555:
+        kaartNummer = int(input('Wat is uw kaartnummer?'))
+        saldo = int(input('Wat is uw saldo?'))
+        resterendSaldo = saldo - huidigePrijs(kaartNummer)
+        urenOver = resterendSaldo / standaardPrijsUur
+        if urenOver > 0:
+            print("U kunt uw fiets nog:", urenOver, "uur stallen")
+        else:
+            print('U komt:', resterendSaldo, 'tekort.')
+        continue
     for x in kluisjes:
         if optieGui == x['kaartNummer']:
             print(kluisjes.index(x) + 1)
