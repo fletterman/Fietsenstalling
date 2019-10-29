@@ -140,7 +140,7 @@ while True:
             legeKluizen += 1
             if legeKluizen == len(kluisjes):
                 print("U heeft geen kluis in gebruik")
-    else:
+    elif kaartNummer == "q":
         False
 
 # def clicked():
