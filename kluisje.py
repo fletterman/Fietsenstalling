@@ -1,5 +1,5 @@
 #basis
-import json, datetime
+import json, datetime, time
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 from tkinter import *
 from tkinter.messagebox import showinfo
@@ -13,14 +13,14 @@ standaardPrijsMinuut = standaardPrijsUur / 60
 # legeKluizen = 0
 
 
-def kluisCheck(getal, kaartNummer):
+def kluisCheck(optie, kaartNummer):
     legeKluizen = 0
-    if getal == 1:
+    if optie == 1:
         for x in kluisjes:
             if kaartNummer == x['kaartNummer']:
                 print("U mag maar 1 kluis in gebruik hebben. Leeg uw kluis eerst voordat u een nieuwe aanvraagt")
                 return True
-    if getal == 2:
+    if optie == 2:
         for x in kluisjes:
             if kaartNummer == x['kaartNummer']:
                 resultaat = kluisjes.index(x) + 1
@@ -104,13 +104,23 @@ def huidigeDatum():
 
 def botHuidigePrijs(update, context):
     update.message.reply_text("wat is uw kaartNummer?")
-    update.message.reply_text("Uw prijs is: ", huidigePrijs(kaartNummer))
-def botKluisjeCheck(kaartNummer, update, context):
-    kaartNummer = int(input("wat is uw kaartnummer?"))
-def botResterendeTijd(kaartNummer, update, context):
+    print("test1")
+    time.sleep(5)
+    print("test2")
+    kaartNummer = update.message.text()
+    print(kaartNummer)
+    update.message.reply_text("Uw prijs is: ", huidigePrijs(int(kaartNummer)))
+def botKluisjeCheck(update, context):
+    update.message.reply_text("wat is uw kaartNummer?")
+    time.sleep(5)
+    kaartNummer = update.message.text()
+    kluisje = str(kluisCheck(2, int(kaartNummer)))
+    update.message.reply_text(kluisje)
+def botResterendeTijd(update, context):
     update.message.reply_text('Hoeveel saldo beschikt u over?')
     x = True
     while x:
+        time.sleep(5)
         saldo = update.message.text
         try:
             saldo = int(saldo)
@@ -127,9 +137,9 @@ def botResterendeTijd(kaartNummer, update, context):
 def main():
     updater = Updater("878137494:AAFq1YmAoh4bMGXeUBPM90hTJUMNdivlqw4", use_context=True)
     dp = updater.dispatcher
-    dp.add_handler(CommandHandler("kluisjecheck", botKluisjeCheck()))
-    dp.add_handler(CommandHandler("huidigeprijs", botHuidigePrijs()))
-    dp.add_handler(CommandHandler("resterendetijd", botResterendeTijd()))
+    dp.add_handler(CommandHandler("kluisjecheck", botKluisjeCheck))
+    dp.add_handler(CommandHandler("huidigeprijs", botHuidigePrijs))
+    dp.add_handler(CommandHandler("resterendetijd", botResterendeTijd))
     updater.start_polling()
     updater.idle()
 
