@@ -1,6 +1,5 @@
 #basis
 import json, datetime, time
-from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 from tkinter import *
 from tkinter.messagebox import showinfo
 
@@ -109,68 +108,7 @@ def huidigeDatum():
 
 ########################################################################################################################
 
-def botHuidigePrijs(update, context):
-<<<<<<< Updated upstream
-    update.message.reply_text("wat is uw kaartNummer?")
-    print("test1")
-    time.sleep(5)
-    print("test2")
-    kaartNummer = update.message.text()
-    print(kaartNummer)
-    update.message.reply_text("Uw prijs is: ", huidigePrijs(int(kaartNummer)))
-def botKluisjeCheck(update, context):
-    update.message.reply_text("wat is uw kaartNummer?")
-    time.sleep(5)
-    kaartNummer = update.message.text()
-    kluisje = str(kluisCheck(2, int(kaartNummer)))
-    update.message.reply_text(kluisje)
-def botResterendeTijd(update, context):
-=======
-    update.message.reply_text("wat is uw kaartnummer?")
-    time.sleep(5)
-    kaartNummer = update.message.text
-    update.message.reply_text("Uw prijs is: ", huidigePrijs(kaartNummer))
-def botKluisjeCheck(update, context):
-    update.ForceReply("Wat is uw kaartnummer?")
-    time.sleep(5)
-    kaartNummer = update.message.text
-    print("test1")
-    print(kaartNummer)
-    update.message.reply_text(kluischeck(2, int(kaartNummer)))
-    print("test2")
-def botResterendeTijd(update, context):
-    update.message.reply_text("Wat is uw kaartnummer?")
-    kaartNummer = update.message.text
-    print(update.message.text)
->>>>>>> Stashed changes
-    update.message.reply_text('Hoeveel saldo beschikt u over?')
-    x = True
-    while x:
-        time.sleep(5)
-        saldo = update.message.text
-        try:
-            saldo = int(saldo)
-            x = False
-        except:
-            update.message.reply_text('U moet een getal invullen')
-    resterendSaldo = saldo - huidigePrijs(kaartNummer)
-    urenOver = resterendSaldo / standaardPrijsUur
-    if urenOver > 0:
-        update.message.reply_text("U kunt uw fiets nog:", urenOver, "uur stallen")
-    else:
-        update.message.reply_text('U komt:', resterendSaldo, 'tekort.')
-
-def main():
-    updater = Updater("878137494:AAFq1YmAoh4bMGXeUBPM90hTJUMNdivlqw4", use_context=True)
-    dp = updater.dispatcher
-    dp.add_handler(CommandHandler("kluisjecheck", botKluisjeCheck))
-    dp.add_handler(CommandHandler("huidigeprijs", botHuidigePrijs))
-    dp.add_handler(CommandHandler("resterendetijd", botResterendeTijd))
-    updater.start_polling()
-    updater.idle()
-
-if __name__ == '__main__':
-    main()
+#Hier komt de bot
 
 ########################################################################################################################
 
