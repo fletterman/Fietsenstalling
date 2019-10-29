@@ -12,6 +12,7 @@ standaardPrijsUur = 0.30
 standaardPrijsMinuut = standaardPrijsUur / 60
 # legeKluizen = 0
 
+
 def kluisCheck(getal, kaartNummer):
     legeKluizen = 0
     if getal == 1:
@@ -98,6 +99,9 @@ def huidigeDatum():
         "stallingsMinuut": int(huidigeMinuut)
     }
     return datumDictionary
+
+########################################################################################################################
+
 def botHuidigePrijs(update, context):
     update.message.reply_text("wat is uw kaartNummer?")
     update.message.reply_text("Uw prijs is: ", huidigePrijs(kaartNummer))
@@ -131,6 +135,8 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+########################################################################################################################
 
 
 # while True:
