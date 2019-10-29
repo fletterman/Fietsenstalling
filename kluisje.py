@@ -1,5 +1,8 @@
 #basis
+import json, datetime
 from tkinter import *
+def totaalMinuten(stallingsJaar, stallingsMaand, stallingsDag, stallingsUur, stallingsMinuut):
+
 def stallingsTijd(stallingsDatum):
     som = 0
     vandaag = datetime.datetime.today()
