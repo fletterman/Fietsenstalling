@@ -12,7 +12,10 @@ standaardPrijsUur = 0.30
 standaardPrijsMinuut = standaardPrijsUur / 60
 # legeKluizen = 0
 
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 def kluisCheck(optie, kaartNummer):
     legeKluizen = 0
     if optie == 1:
@@ -20,7 +23,11 @@ def kluisCheck(optie, kaartNummer):
             if kaartNummer == x['kaartNummer']:
                 print("U mag maar 1 kluis in gebruik hebben. Leeg uw kluis eerst voordat u een nieuwe aanvraagt")
                 return True
+<<<<<<< Updated upstream
     if optie == 2:
+=======
+    elif optie == 2:
+>>>>>>> Stashed changes
         for x in kluisjes:
             if kaartNummer == x['kaartNummer']:
                 resultaat = kluisjes.index(x) + 1
@@ -103,6 +110,7 @@ def huidigeDatum():
 ########################################################################################################################
 
 def botHuidigePrijs(update, context):
+<<<<<<< Updated upstream
     update.message.reply_text("wat is uw kaartNummer?")
     print("test1")
     time.sleep(5)
@@ -117,6 +125,24 @@ def botKluisjeCheck(update, context):
     kluisje = str(kluisCheck(2, int(kaartNummer)))
     update.message.reply_text(kluisje)
 def botResterendeTijd(update, context):
+=======
+    update.message.reply_text("wat is uw kaartnummer?")
+    time.sleep(5)
+    kaartNummer = update.message.text
+    update.message.reply_text("Uw prijs is: ", huidigePrijs(kaartNummer))
+def botKluisjeCheck(update, context):
+    update.ForceReply("Wat is uw kaartnummer?")
+    time.sleep(5)
+    kaartNummer = update.message.text
+    print("test1")
+    print(kaartNummer)
+    update.message.reply_text(kluischeck(2, int(kaartNummer)))
+    print("test2")
+def botResterendeTijd(update, context):
+    update.message.reply_text("Wat is uw kaartnummer?")
+    kaartNummer = update.message.text
+    print(update.message.text)
+>>>>>>> Stashed changes
     update.message.reply_text('Hoeveel saldo beschikt u over?')
     x = True
     while x:
