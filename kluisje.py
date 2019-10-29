@@ -1,6 +1,9 @@
 #basis
 import json, datetime
-# from tkinter import *
+from tkinter import *
+from tkinter.messagebox import showinfo
+
+
 
 vandaag = datetime.datetime.today()
 beheerder = 111
@@ -8,9 +11,8 @@ standaardPrijsUur = 0.30
 standaardPrijsMinuut = standaardPrijsUur / 60
 # legeKluizen = 0
 
-def kluisCheck(getal):
+def kluisCheck(getal, kaartNummer):
     legeKluizen = 0
-    kaartNummer = int(input("Welke kaartnummer is van u?"))
     if getal == 1:
         for x in kluisjes:
             if kaartNummer == x['kaartNummer']:
@@ -27,14 +29,26 @@ def kluisCheck(getal):
                     resultaat = "U heeft geen kluis in gebruik"
                     return resultaat
 
-def nieuweKluis():
+def nieuweKluis(kaartNummer):
+    teller = 1
     with open("fietsenstallingen.json", 'r', encoding='utf-8') as infile:
         kluisjes = json.load(infile)
-    kaartNummer = int(input("Welke kaartnummer wordt er gebruikt?"))
-    if kluisCheck(1):
+    if kluisCheck(1, kaartNummer):
         return "\n"
     dictionary = huidigeDatum()
     dictionary['bezet'] = True
+    dictionary['kluisNummer'] = len(kluisjes) + 1
+    legeLijst = []
+    for x in kluisjes:
+        legeLijst.append(x['kluisNummer'])
+    print(legeLijst)
+    for x in kluisjes:
+        if teller in legeLijst:
+            teller += 1
+            continue
+        else:
+            dictionary['kluisNummer'] = teller
+            break
     dictionary['kaartNummer'] = kaartNummer
     kluisjes.append(dictionary)
     resultaat = "U heeft kluisje: {}".format(len(kluisjes))
@@ -43,7 +57,15 @@ def nieuweKluis():
     return resultaat
 
 def kluisInleveren():
-    pass
+    with open("fietsenstallingen.json", 'r', encoding='utf-8') as infile:
+        kluisjes = json.load(infile)
+    index = kluisCheck(2) - 1
+    kluisjes.pop(index)
+    with open("fietsenstallingen.json", 'w', encoding='utf-8') as outfile:
+        json.dump(kluisjes, outfile, ensure_ascii=False, indent=4)
+    tekst = "Uw kluis is ingeleverd"
+    return tekst
+
 def huidigePrijs(kaartNummer):
     with open("fietsenstallingen.json", 'r', encoding='utf-8') as infile:
         kluisjes = json.load(infile)
@@ -67,6 +89,7 @@ def huidigeDatum():
     datumDictionary = {
         "bezet": False,
         "kaartNummer": 0,
+        "kluisNummer": 0,
         "stallingsJaar": int(huidigeJaar),
         "stallingsMaand": int(huidigeMaandNummer),
         "stallingsDag": int(huidigeDag),
@@ -93,10 +116,12 @@ while True:
         print("Uw prijs is: ", huidigePrijs(kaartNummer))
         continue
     elif optieGui == 333:
-        nieuweKluis()
+        kaartNummer = int(input("wat is uw kaartnummer?"))
+        nieuweKluis(kaartNummer)
         continue
     elif optieGui == 444:
-        pass
+        kluisInleveren()
+        continue
     elif optieGui == 555:
         kaartNummer = int(input('Wat is uw kaartnummer?'))
         saldo = int(input('Wat is uw saldo?'))
@@ -115,3 +140,15 @@ while True:
             legeKluizen += 1
             if legeKluizen == len(kluisjes):
                 print("U heeft geen kluis in gebruik")
+    else:
+        False
+
+# def clicked():
+#     bericht = 'Dit een bericht voor de gebruiker!'
+#     showinfo(title='popup', message=bericht)
+#
+# root = Tk()
+# button = Button(master=root, text='Druk hier', command=clicked)
+# button.pack(pady=10)
+#
+# root.mainloop()
