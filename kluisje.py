@@ -38,8 +38,16 @@ def nieuweKluis():
     resultaat = "U heeft kluisje: {}".format(len(kluisjes))
     with open("fietsenstallingen.json", 'w', encoding='utf-8') as outfile:
         json.dump(kluisjes, outfile, ensure_ascii=False, indent=4)
-    return resultaat
-
+def huidigePrijs(kaartNummer):
+    with open("fietsenstallingen.json", 'r', encoding='utf-8') as infile:
+        kluisjes = json.load(infile)
+    for x in kluisjes:
+        if kaartNummer == x["kaartNummer"]:
+            huidigeMinuten = totaalMinuten(huidigeDatum())
+            print(huidigeMinuten)
+            print(totaalMinuten(x))
+            prijs = huidigeMinuten - totaalMinuten(x)
+            return prijs
 def totaalMinuten(datumDictionary):
     som = 0
     dagenInMaanden = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
@@ -65,10 +73,10 @@ def huidigeDatum():
 
 while True:
     legeKluizen = 0
-    kaartNummer = int(input('Wat is uw kaartnummer?'))
+    optieGui = int(input(' 222 = huidigeprijs berekenen, 333 = nieuwe kluis, 444 = kluis inleveren', ))
     with open("fietsenstallingen.json", 'r', encoding='utf-8') as infile:
         kluisjes = json.load(infile)
-    if kaartNummer == beheerder:
+    if optieGui == beheerder:
         kluisNummer = int(input("Welke kluisnummer wilt u legen?"))
         kluisNummer -= 1
         kluisjes[kluisNummer]["kaartNummer"] = 0
@@ -76,20 +84,20 @@ while True:
         kluisjes[kluisNummer]["stallingsJaar"], kluisjes[kluisNummer]["stallingsMaand"], kluisjes[kluisNummer]["stallingsDag"], kluisjes[kluisNummer]["stallingsUur"], kluisjes[kluisNummer]["stallingsMinuut"] = 0, 0, 0, 0, 0
         print(kluisjes[kluisNummer])
         continue
-    elif kaartNummer == 222:
-
+    elif optieGui == 222:
+        kaartNummer = int(input("wat is uw kluisnummer?"))
+        print(huidigePrijs(kaartNummer))
         continue
-    elif kaartNummer == 333:
-        print(nieuweKluis())
+    elif optieGui == 333:
+        nieuweKluis()
         continue
-    elif kaartNummer == 555:
-        print(kluisCheck(2))
-        continue
-    # for x in kluisjes:
-    #     if kaartNummer == x['kaartNummer']:
-    #         print(kluisjes.index(x) + 1)
-    #         break
-    #     else:
-    #         legeKluizen += 1
-    #         if legeKluizen == len(kluisjes):
-    #             print("U heeft geen kluis in gebruik")
+    elif optieGui == 444:
+        pass
+    for x in kluisjes:
+        if optieGui == x['kaartNummer']:
+            print(kluisjes.index(x) + 1)
+            break
+        else:
+            legeKluizen += 1
+            if legeKluizen == len(kluisjes):
+                print("U heeft geen kluis in gebruik")
