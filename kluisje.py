@@ -5,15 +5,13 @@ import json, datetime
 vandaag = datetime.datetime.today()
 beheerder = 111
 
-def nieuweKluis(kaartNummer):
+def nieuweKluis():
     with open("fietsenstallingen.json", 'r', encoding='utf-8') as infile:
         kluisjes = json.load(infile)
-    print(kluisjes)
-    bezet = True
-    dictionary = houdigeDatum()
-    dictionary['bezet'] = bezet
+    kaartNummer = int(input("Welke kaartnummer wordt er gebruikt?"))
+    dictionary = huidigeDatum()
+    dictionary['bezet'] = True
     dictionary['kaartNummer'] = kaartNummer
-    print(dictionary)
     kluisjes.append(dictionary)
     with open("fietsenstallingen.json", 'w', encoding='utf-8') as outfile:
         json.dump(kluisjes, outfile, ensure_ascii=False, indent=4)
