@@ -1,6 +1,12 @@
 #basis
 import json, datetime
-from tkinter import *
+# from tkinter import *
+
+def nieuweKluis():
+    with open("fietsenstallingen.json", 'r', encoding='utf-8') as infile:
+        kluisjes = json.load(infile)
+    print(kluisjes)
+
 def totaalMinuten(stallingsJaar, stallingsMaand, stallingsDag, stallingsUur, stallingsMinuut):
 
 def stallingsTijd(stallingsDatum):
@@ -33,6 +39,9 @@ while True:
         continue
     elif kaartNummer == 222:
         stallingsTijd('waardelozeWaarde')
+        continue
+    elif kaartNummer == 333:
+        nieuweKluis()
         continue
     for x in kluisjes:
         if kaartNummer == x['kaartNummer']:
