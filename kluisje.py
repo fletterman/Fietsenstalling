@@ -13,6 +13,7 @@ def nieuweKluis():
     dictionary['bezet'] = True
     dictionary['kaartNummer'] = kaartNummer
     kluisjes.append(dictionary)
+    print("U heeft kluisje: {}".format(len(kluisjes)))
     with open("fietsenstallingen.json", 'w', encoding='utf-8') as outfile:
         json.dump(kluisjes, outfile, ensure_ascii=False, indent=4)
 
