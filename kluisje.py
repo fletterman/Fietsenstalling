@@ -28,6 +28,7 @@ def kluisCheck(getal):
                     return resultaat
 
 def nieuweKluis():
+    teller = 1
     with open("fietsenstallingen.json", 'r', encoding='utf-8') as infile:
         kluisjes = json.load(infile)
     kaartNummer = int(input("Welke kaartnummer wordt er gebruikt?"))
@@ -35,6 +36,13 @@ def nieuweKluis():
         return "\n"
     dictionary = huidigeDatum()
     dictionary['bezet'] = True
+    dictionary['kluisNummer'] = len(kluisjes) + 1
+    for x in range(len(kluisjes)+1):
+        if teller != x['kluisNummer']:
+            dictionary['kluisNummer'] = teller
+            break
+        else:
+            teller += 1
     dictionary['kaartNummer'] = kaartNummer
     kluisjes.append(dictionary)
     resultaat = "U heeft kluisje: {}".format(len(kluisjes))
@@ -43,7 +51,14 @@ def nieuweKluis():
     return resultaat
 
 def kluisInleveren():
-    pass
+    with open("fietsenstallingen.json", 'r', encoding='utf-8') as infile:
+        kluisjes = json.load(infile)
+    index = kluisCheck(2) - 1
+    kluisjes.pop(index)
+    with open("fietsenstallingen.json", 'w', encoding='utf-8') as outfile:
+        json.dump(kluisjes, outfile, ensure_ascii=False, indent=4)
+    tekst = "Uw kluis is ingeleverd"
+    return tekst
 
 def huidigePrijs(kaartNummer):
     with open("fietsenstallingen.json", 'r', encoding='utf-8') as infile:
@@ -71,6 +86,7 @@ def huidigeDatum():
     datumDictionary = {
         "bezet": False,
         "kaartNummer": 0,
+        "kluisNummer": 0,
         "stallingsJaar": int(huidigeJaar),
         "stallingsMaand": int(huidigeMaandNummer),
         "stallingsDag": int(huidigeDag),
@@ -100,7 +116,7 @@ while True:
         nieuweKluis()
         continue
     elif optieGui == 444:
-        pass
+        print(kluisInleveren())
     for x in kluisjes:
         if optieGui == x['kaartNummer']:
             print(kluisjes.index(x) + 1)
