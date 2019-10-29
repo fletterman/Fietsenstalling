@@ -21,9 +21,9 @@ def nieuweKluis(kaartNummer):
 def totaalMinuten(datumDictionary):
     som = 0
     dagenInMaanden = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
-    for x  in range(datumDictionary['stallingsMaand'] + 1): #ant dagen in huidige jaar berekenen door
-        som += dagenInMaanden[x]
-    antMinuten = (((som + int(huidigeJaar) * 365 + int(huidigeJaar) // 4) * 24 + int(huidigeDag)) * 60 + int(huidigeMinuut))  # ant jaar * 365 + 1 dag per vier hele jaren + ant dagen in huidige jaar
+    for index in range(datumDictionary['stallingsMaand'] + 1):
+        som += dagenInMaanden[index]
+    antMinuten = (((som + datumDictionary['stallingsJaar'] * 365 + datumDictionary['stallingsJaar'] // 4) * 24 + datumDictionary['stallingsDag']) * 60 + datumDictionary['stallingsMinuut'])  # ant jaar * 365 + 1 dag per vier hele jaren + ant dagen in huidige jaar
     return antMinuten
 def huidigeDatum():
     maanden = {"Jan": 1, "Feb": 2, "Mar": 3, "Apr": 4, "May": 5, "Jun": 6, "Jul": 7, "Aug": 8, "Sep": 9, "Oct": 10, "Nov": 11, "Dec": 12}
@@ -54,7 +54,7 @@ while True:
         print(kluisjes[kluisNummer])
         continue
     elif kaartNummer == 222:
-        stallingsTijd('waardelozeWaarde')
+
         continue
     elif kaartNummer == 333:
         nieuweKluis()
