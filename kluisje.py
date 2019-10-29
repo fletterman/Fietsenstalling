@@ -10,9 +10,13 @@ def nieuweKluis(kaartNummer):
         kluisjes = json.load(infile)
     print(kluisjes)
     bezet = True
-    kaartNummer = kaartNummer
-    stallingsJaar = vandaag.strftime('%Y')
-    stallingsMaand
+    dictionary = houdigeDatum()
+    dictionary['bezet'] = bezet
+    dictionary['kaartNummer'] = kaartNummer
+    print(dictionary)
+    kluisjes.append(dictionary)
+    with open("fietsenstallingen.json", 'w', encoding='utf-8') as outfile:
+        json.dump(kluisjes, outfile, ensure_ascii=False, indent=4)
 
 def totaalMinuten(stallingsJaar, stallingsMaand, stallingsDag, stallingsUur, stallingsMinuut):
     pass
