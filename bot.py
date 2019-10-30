@@ -1,6 +1,5 @@
-import requests
-import json
-import kluisje
+import requests, json, kluisje
+#kluisje import verbeteren door middel van classes in kluisje, alle onnodige junk ook uit kluisje halen.
 token = "878137494:AAFq1YmAoh4bMGXeUBPM90hTJUMNdivlqw4"
 baseurl = "https://api.telegram.org/bot{}/".format(token)
 ovGegeven, update_id, ovNummer = False, None, None
