@@ -1,20 +1,14 @@
-#basis
 import json, datetime
-from tkinter import *
+# from tkinter import *
 
-def clicked():
-    bericht = 'Dit een bericht voor de gebruiker!'
-    showinfo(title='popup', message=bericht)
-
-
-
-
+# def clicked():
+#     bericht = 'Dit een bericht voor de gebruiker!'
+#     showinfo(title='popup', message=bericht)
 
 vandaag = datetime.datetime.today()
 beheerder = 111
 standaardPrijsUur = 0.30
 standaardPrijsMinuut = standaardPrijsUur / 60
-# legeKluizen = 0
 
 def kluisCheck(getal, kaartNummer):
     legeKluizen = 0
@@ -103,11 +97,11 @@ def huidigeDatum():
     }
     return datumDictionary
 
-root = Tk()
-button = Button(master=root, text='Druk hier', command=clicked)
-button.pack(pady=10)
-
-root.mainloop()
+# root = Tk()
+# button = Button(master=root, text='Druk hier', command=clicked)
+# button.pack(pady=10)
+#
+# root.mainloop()
 
 while True:
     legeKluizen = 0
