@@ -10,14 +10,16 @@ beheerder = 111
 standaardPrijsUur = 0.30
 standaardPrijsMinuut = standaardPrijsUur / 60
 
-def kluisCheck(getal, kaartNummer):
+def kluisCheck(optie, kaartNummer):
     legeKluizen = 0
-    if getal == 1:
+    with open("fietsenstallingen.json", 'r', encoding='utf-8') as infile:
+        kluisjes = json.load(infile)
+    if optie == 1:
         for x in kluisjes:
             if kaartNummer == x['kaartNummer']:
                 print("U mag maar 1 kluis in gebruik hebben. Leeg uw kluis eerst voordat u een nieuwe aanvraagt")
                 return True
-    if getal == 2:
+    if optie == 2:
         for x in kluisjes:
             if kaartNummer == x['kaartNummer']:
                 resultaat = kluisjes.index(x) + 1
@@ -103,55 +105,58 @@ def huidigeDatum():
 #
 # root.mainloop()
 
-while True:
-    legeKluizen = 0
-    optieGui = ""
-    optieGuiString = input('111 = Beheerder, 222 = huidigeprijs berekenen, 333 = nieuwe kluis, 444 = kluis inleveren, 555 = resterende tijd berekenen')
-    if optieGuiString == 'q':
-        break
-    else:
-        optieGui = int(optieGuiString)
-    with open("fietsenstallingen.json", 'r', encoding='utf-8') as infile:
-        kluisjes = json.load(infile)
-    if optieGui == beheerder:
-        kluisNummer = int(input("Welke kluisnummer wilt u legen?"))
-        kluisNummer -= 1
-        kluisjes[kluisNummer]["kaartNummer"] = 0
-        kluisjes[kluisNummer]["bezet"] = False
-        kluisjes[kluisNummer]["stallingsJaar"], kluisjes[kluisNummer]["stallingsMaand"], kluisjes[kluisNummer]["stallingsDag"], kluisjes[kluisNummer]["stallingsUur"], kluisjes[kluisNummer]["stallingsMinuut"] = 0, 0, 0, 0, 0
-        print(kluisjes[kluisNummer])
-        continue
-    elif optieGui == 222:
-        kaartNummer = int(input("wat is uw kaartnummer?"))
-        print("Uw prijs is: ", huidigePrijs(kaartNummer))
-        continue
-    elif optieGui == 333:
-        kaartNummer = int(input("wat is uw kaartnummer?"))
-        nieuweKluis(kaartNummer)
-        continue
-    elif optieGui == 444:
-        kluisInleveren()
-        continue
-    elif optieGui == 555:
-        kaartNummer = int(input('Wat is uw kaartnummer?'))
-        saldo = int(input('Wat is uw saldo?'))
-        resterendSaldo = saldo - huidigePrijs(kaartNummer)
-        urenOver = resterendSaldo / standaardPrijsUur
-        if urenOver > 0:
-            print("U kunt uw fiets nog:", urenOver, "uur stallen")
-        else:
-            print('U komt:', resterendSaldo, 'tekort.')
-        continue
-    elif optieGui == "q":
-        False
-    for x in kluisjes:
-        if optieGui == x['kaartNummer']:
-            print(kluisjes.index(x) + 1)
-            break
-        else:
-            legeKluizen += 1
-            if legeKluizen == len(kluisjes):
-                print("U heeft geen kluis in gebruik")
 
+'''hieronder is de console test code, deze is nu obsolete'''
 
-
+# while True:
+#     legeKluizen = 0
+#     optieGui = ""
+#     optieGuiString = input('111 = Beheerder, 222 = huidigeprijs berekenen, 333 = nieuwe kluis, 444 = kluis inleveren, 555 = resterende tijd berekenen')
+#     if optieGuiString == 'q':
+#         break
+#     else:
+#         optieGui = int(optieGuiString)
+#     with open("fietsenstallingen.json", 'r', encoding='utf-8') as infile:
+#         kluisjes = json.load(infile)
+#     if optieGui == beheerder:
+#         kluisNummer = int(input("Welke kluisnummer wilt u legen?"))
+#         kluisNummer -= 1
+#         kluisjes[kluisNummer]["kaartNummer"] = 0
+#         kluisjes[kluisNummer]["bezet"] = False
+#         kluisjes[kluisNummer]["stallingsJaar"], kluisjes[kluisNummer]["stallingsMaand"], kluisjes[kluisNummer]["stallingsDag"], kluisjes[kluisNummer]["stallingsUur"], kluisjes[kluisNummer]["stallingsMinuut"] = 0, 0, 0, 0, 0
+#         print(kluisjes[kluisNummer])
+#         continue
+#     elif optieGui == 222:
+#         kaartNummer = int(input("wat is uw kaartnummer?"))
+#         print("Uw prijs is: ", huidigePrijs(kaartNummer))
+#         continue
+#     elif optieGui == 333:
+#         kaartNummer = int(input("wat is uw kaartnummer?"))
+#         nieuweKluis(kaartNummer)
+#         continue
+#     elif optieGui == 444:
+#         kluisInleveren()
+#         continue
+#     elif optieGui == 555:
+#         kaartNummer = int(input('Wat is uw kaartnummer?'))
+#         saldo = int(input('Wat is uw saldo?'))
+#         resterendSaldo = saldo - huidigePrijs(kaartNummer)
+#         urenOver = resterendSaldo / standaardPrijsUur
+#         if urenOver > 0:
+#             print("U kunt uw fiets nog:", urenOver, "uur stallen")
+#         else:
+#             print('U komt:', resterendSaldo, 'tekort.')
+#         continue
+#     elif optieGui == "q":
+#         False
+#     for x in kluisjes:
+#         if optieGui == x['kaartNummer']:
+#             print(kluisjes.index(x) + 1)
+#             break
+#         else:
+#             legeKluizen += 1
+#             if legeKluizen == len(kluisjes):
+#                 print("U heeft geen kluis in gebruik")
+#
+#
+#
