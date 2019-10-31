@@ -17,7 +17,7 @@ def kluisCheck(optie, kaartNummer):
     if optie == 1:
         for x in kluisjes:
             if kaartNummer == x['kaartNummer']:
-                print("U mag maar 1 kluis in gebruik hebben. Leeg uw kluis eerst voordat u een nieuwe aanvraagt")
+                print("Kaartnummer al in gebruik")
                 return True
     if optie == 2:
         for x in kluisjes:
