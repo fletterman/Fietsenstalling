@@ -21,16 +21,6 @@
     },
     {
         "bezet": true,
-        "kaartNummer": 2,
-        "kluisNummer": 5,
-        "stallingsJaar": 2019,
-        "stallingsMaand": 10,
-        "stallingsDag": 29,
-        "stallingsUur": 14,
-        "stallingsMinuut": 4
-    },
-    {
-        "bezet": true,
         "kaartNummer": 11,
         "kluisNummer": 3,
         "stallingsJaar": 2019,
@@ -58,5 +48,15 @@
         "stallingsDag": 29,
         "stallingsUur": 14,
         "stallingsMinuut": 23
+    },
+    {
+        "bezet": true,
+        "kaartNummer": 1,
+        "kluisNummer": 5,
+        "stallingsJaar": 2019,
+        "stallingsMaand": 10,
+        "stallingsDag": 31,
+        "stallingsUur": 11,
+        "stallingsMinuut": 46
     }
 ]
