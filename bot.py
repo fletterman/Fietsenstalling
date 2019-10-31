@@ -34,12 +34,14 @@ def volgendeBerichtOphalen(chat_id, offset, vraag, isINT, isOV):
                     offset += 1
                     continue
                 if isOV:
+                    
                     global ovGegeven
                     ovGegeven = True
                 return Nummer
         else:
             if bericht['result']:
                 return bericht['result'][0]['message']['text']
+
 while True:
     bericht = getUpdates(offset=update_id)
     # print('hier')
