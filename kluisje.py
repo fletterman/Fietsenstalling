@@ -57,10 +57,10 @@ def nieuweKluis(kaartNummer):
         json.dump(kluisjes, outfile, ensure_ascii=False, indent=4)
     return resultaat
 
-def kluisInleveren():
+def kluisInleveren(kaartnummer):
     with open("fietsenstallingen.json", 'r', encoding='utf-8') as infile:
         kluisjes = json.load(infile)
-    index = kluisCheck(2) - 1
+    index = kluisCheck(2, kaartnummer) - 1
     kluisjes.pop(index)
     with open("fietsenstallingen.json", 'w', encoding='utf-8') as outfile:
         json.dump(kluisjes, outfile, ensure_ascii=False, indent=4)
@@ -98,6 +98,22 @@ def huidigeDatum():
         "stallingsMinuut": int(huidigeMinuut)
     }
     return datumDictionary
+
+def stalTijd(kaartnummer):
+    datumDictionary = huidigeDatum()
+    huidigeTijd = totaalMinuten(datumDictionary)
+    locatie = 0
+    with open('fietsenstallingen.json', 'r', encoding='utf-8') as infile:
+        kluisjes = json.load(infile)
+    for x in kluisjes:
+        if kaartnummer == x['kaartNummer']:
+            locatie = kluisjes.index(x)
+        else:
+            resultaat = "Deze kaart gebruikt geen kluis"
+            return resultaat
+    stallingsTijd = totaalMinuten(kluisjes[locatie])
+    duur = huidigeTijd - stallingsTijd
+    return duur
 
 # root = Tk()
 # button = Button(master=root, text='Druk hier', command=clicked)
