@@ -75,14 +75,11 @@ def tijdBerekenen():
     """Berekent de verstreken tijd sinds er iets in een kluis is gezet door de kaartnummer"""
     nummer = tijdAanvraag.get()
     if main.intOVChek(nummer) == 'geenInt':
-        inleveren = "Uw kaartnummer bestaat alleen uit cijfers."
-        tijdLabel["text"] = inleveren
+        tijdLabel["text"] = "Uw kaartnummer bestaat alleen uit cijfers."
     elif main.intOVChek(nummer) == 'negatief':
-        inleveren = "U moet een OV kaartnummer opleveren, deze zijn niet negatief."
-        tijdLabel["text"] = inleveren
+        tijdLabel["text"] = "U moet een OV kaartnummer opleveren, deze zijn niet negatief."
     elif main.intOVChek(nummer) == 'geenOV':
-        inleveren = "Uw OV is niet in onze database gevonden."
-        tijdLabel["text"] = inleveren
+        tijdLabel["text"] = "Uw OV is niet in onze database gevonden."
     else:
         nummer = int(nummer)
         minuten = main.stalTijd(nummer)
@@ -98,8 +95,7 @@ def tijdBerekenen():
         elif minuten < 60:
             tijdBericht = 'Uw fiets staat al {} minuten gestalt.'.format(minuten)
         if isinstance(minuten, str):
-            tijdBericht = "U heeft geen kluis in gebruik\n"
-            tijdLabel["text"] = tijdBericht
+            tijdLabel["text"] = "U heeft geen kluis in gebruik\n"
         else:
             bericht = tijdBericht + "Uw kaartnummer is: " + str(nummer)
             tijdLabel["text"] = bericht
@@ -130,10 +126,8 @@ label.pack()
 """Frame voor nieuwe kluis aanvragen wordt aangemaakt met alle knoppen, entries (overbodig door random generator) en tekst"""
 nieuweKluisFrame = Frame(master=root, background='yellow')
 nieuweKluisFrame.pack(fill="both", expand=True)
-nummerField = Entry(master=nieuweKluisFrame)
-nummerField.pack(pady=20)
-kaartNummer = Button(master=nieuweKluisFrame, text='Volgende', command=nieuweKluis, foreground="white", background="deep sky blue")
-kaartNummer.pack(pady=10)
+kaartNummer = Button(master=nieuweKluisFrame, text='Kluis aanvragen', command=nieuweKluis, foreground="white", background="deep sky blue")
+kaartNummer.pack(pady=20)
 backbutton = Button(master=nieuweKluisFrame, text='<', command=toonLoginFrame, foreground="white", background="deep sky blue")
 backbutton.pack(padx=20, pady=20)
 nieuweKluis = Label(master=nieuweKluisFrame, text="", width=80, height=20, background='yellow')
