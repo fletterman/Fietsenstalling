@@ -38,13 +38,13 @@ def nummerGenerator():
 def kostenBerekenen():
     """Berekent de kosten van de opgegeven kaart als die een kluis in gebruik heeft"""
     nummer = kostenNummer.get()
-    if isinstance(nummer, str):
-        inleveren = "Geef een cijfer als je kaartnummer en niet een string"
-        kostenLabel["text"] = inleveren
-    else:
+    try:
         nummer = int(nummer)
         kosten = main.huidigePrijs(nummer)
         kostenLabel["text"] = kosten
+    except:
+        inleveren = "Geef een cijfer als je kaartnummer en niet een string"
+        kostenLabel["text"] = inleveren
 
 def nieuweKluis():
     """Vraagt om een random gegenereerd getal, controleert of die al een kluis in gebruik heeft en geeft het kaartnummer en het bericht dat uit de functie komt weer"""
@@ -57,21 +57,18 @@ def nieuweKluis():
 def inleverenKluis():
     """Vraagt om een kaartnummer die gecontroleerd wordt of die een kluis heeft. Als die een kluis heeft wordt de kluis verwijdert, anders gebeurd er niets, en wordt weergegeven wat er gebeurdt is"""
     nummer = inleverenKluisEntry.get()
-    if isinstance(nummer, str):
-        inleveren = "Geef een cijfer als je kaartnummer en niet een string"
-        inleverenLabel["text"] = inleveren
-    else:
+    try:
         nummer = int(nummer)
-        inleveren = main.kluisInleveren(nummer)
+        kosten = K.huidigePrijs(nummer)
+        inleverenLabel["text"] = kosten
+    except:
+        inleveren = "Geef een cijfer als je kaartnummer en niet een string"
         inleverenLabel["text"] = inleveren
 
 def tijdBerekenen():
     """Berekent de verstreken tijd sinds er iets in een kluis is gezet door de kaartnummer"""
     nummer = tijdAanvraag.get()
-    if isinstance(nummer, str):
-        inleveren = "Geef een cijfer als je kaartnummer en niet een string"
-        tijdLabel["text"] = inleveren
-    else:
+    try:
         nummer = int(nummer)
         minuten = main.stalTijd(nummer)
         minutenrest = minuten % 60
@@ -90,6 +87,9 @@ def tijdBerekenen():
         else:
             bericht = tijdBericht + "Uw kaartnummer is: " + str(nummer)
             tijdLabel["text"] = bericht
+    except:
+        inleveren = "Geef een cijfer als je kaartnummer en niet een string"
+        tijdLabel["text"] = inleveren
 
 root = Tk()
 
