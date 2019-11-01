@@ -29,7 +29,7 @@ def kluisCheck(optie, kaartNummer):
             else:
                 legeKluizen += 1
                 if legeKluizen == len(kluisjes):
-                    resultaat = "U heeft geen kluis in gebruik"
+                    resultaat = False
                     return resultaat
 
 def nieuweKluis(kaartNummer):

@@ -34,7 +34,7 @@ def volgendeBerichtOphalen(chat_id, offset, vraag, isINT, isOV):
                     offset += 1
                     continue
                 if isOV:
-                    if kluisje.kluisCheck(1, Nummer):
+                    if kluisje.kluisCheck(1, Nummer)[1] == False:
                         global ovGegeven
                         ovGegeven = True
                         return Nummer
