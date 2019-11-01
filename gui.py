@@ -1,6 +1,6 @@
-import random
+import random, main
 from tkinter import *
-import main as K
+
 
 def toonLoginFrame():
     """Toont de hoofdpagina en verbergt degene die open stond als er terug gegaan is"""
@@ -40,7 +40,7 @@ def kostenBerekenen():
     nummer = kostenNummer.get()
     try:
         nummer = int(nummer)
-        kosten = K.huidigePrijs(nummer)
+        kosten = main.huidigePrijs(nummer)
         kostenLabel["text"] = kosten
     except:
         inleveren = "Geef een cijfer als je kaartnummer en niet een string"
@@ -50,7 +50,7 @@ def nieuweKluis():
     """Vraagt om een random gegenereerd getal, controleert of die al een kluis in gebruik heeft en geeft het kaartnummer en het bericht dat uit de functie komt weer"""
     nummer = nummerGenerator()
     nummer = int(nummer)
-    resultaat = K.nieuweKluis(nummer)
+    resultaat = main.nieuweKluis(nummer)
     bericht = "Uw kaartnummer is: {}\n".format(nummer) + resultaat
     nieuweKluis["text"] = bericht
 
@@ -70,9 +70,18 @@ def tijdBerekenen():
     nummer = tijdAanvraag.get()
     try:
         nummer = int(nummer)
-        tijd = K.stalTijd(nummer)
-        tijdBericht = "U heeft uw kluis al {} minuten in gebruik\n".format(tijd)
-        if isinstance(tijd, str):
+        minuten = main.stalTijd(nummer)
+        minutenrest = minuten % 60
+        uren = minuten // 60
+        urenrest = uren % 24
+        dagen = uren // 24
+        if dagen > 0:
+            tijdBericht = 'uw fiets staat al {} dagen en {} uur gestalt.'.format(dagen, urenrest)
+        elif uren > 0:
+            tijdBericht = 'Uw fiets staat al {} uur en {} minuten gestalt'.format(uren, minutenrest)
+        elif minuten < 60:
+            tijdBericht = 'Uw fiets staat al {} minuten gestalt.'.format(minuten)
+        if isinstance(minuten, str):
             tijdBericht = "U heeft geen kluis in gebruik\n"
             tijdLabel["text"] = tijdBericht
         else:
