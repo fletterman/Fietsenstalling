@@ -1,162 +1,22 @@
 [
     {
         "bezet": true,
-        "kaartNummer": 100,
-        "kluisNummer": 8,
-        "stallingsJaar": 2019,
-        "stallingsMaand": 10,
-        "stallingsDag": 31,
-        "stallingsUur": 13,
-        "stallingsMinuut": 50
-    },
-    {
-        "bezet": true,
-        "kaartNummer": 20,
-        "kluisNummer": 10,
-        "stallingsJaar": 2019,
-        "stallingsMaand": 11,
-        "stallingsDag": 1,
-        "stallingsUur": 10,
-        "stallingsMinuut": 25
-    },
-    {
-        "bezet": true,
-        "kaartNummer": 16,
-        "kluisNummer": 16,
-        "stallingsJaar": 2019,
-        "stallingsMaand": 11,
-        "stallingsDag": 1,
-        "stallingsUur": 10,
-        "stallingsMinuut": 25
-    },
-    {
-        "bezet": true,
-        "kaartNummer": 17,
-        "kluisNummer": 19,
-        "stallingsJaar": 2019,
-        "stallingsMaand": 11,
-        "stallingsDag": 1,
-        "stallingsUur": 10,
-        "stallingsMinuut": 25
-    },
-    {
-        "bezet": true,
-        "kaartNummer": 5,
-        "kluisNummer": 7,
-        "stallingsJaar": 2019,
-        "stallingsMaand": 11,
-        "stallingsDag": 1,
-        "stallingsUur": 4,
-        "stallingsMinuut": 27
-    },
-    {
-        "bezet": true,
-        "kaartNummer": 13,
-        "kluisNummer": 2,
-        "stallingsJaar": 2019,
-        "stallingsMaand": 11,
-        "stallingsDag": 1,
-        "stallingsUur": 15,
-        "stallingsMinuut": 27
-    },
-    {
-        "bezet": true,
-        "kaartNummer": 15,
-        "kluisNummer": 6,
-        "stallingsJaar": 2019,
-        "stallingsMaand": 11,
-        "stallingsDag": 1,
-        "stallingsUur": 0,
-        "stallingsMinuut": 27
-    },
-    {
-        "bezet": true,
-        "kaartNummer": 4,
-        "kluisNummer": 9,
-        "stallingsJaar": 2019,
-        "stallingsMaand": 11,
-        "stallingsDag": 1,
-        "stallingsUur": 3,
-        "stallingsMinuut": 29
-    },
-    {
-        "bezet": true,
-        "kaartNummer": 23,
-        "kluisNummer": 11,
-        "stallingsJaar": 2019,
-        "stallingsMaand": 11,
-        "stallingsDag": 1,
-        "stallingsUur": 10,
-        "stallingsMinuut": 29
-    },
-    {
-        "bezet": true,
-        "kaartNummer": 22,
+        "kaartNummer": 14,
         "kluisNummer": 1,
         "stallingsJaar": 2019,
         "stallingsMaand": 11,
         "stallingsDag": 1,
-        "stallingsUur": 11,
-        "stallingsMinuut": 3
+        "stallingsUur": 14,
+        "stallingsMinuut": 17
     },
     {
         "bezet": true,
-        "kaartNummer": 19,
-        "kluisNummer": 3,
+        "kaartNummer": 0,
+        "kluisNummer": 2,
         "stallingsJaar": 2019,
         "stallingsMaand": 11,
         "stallingsDag": 1,
-        "stallingsUur": 11,
-        "stallingsMinuut": 20
-    },
-    {
-        "bezet": true,
-        "kaartNummer": 2,
-        "kluisNummer": 4,
-        "stallingsJaar": 2019,
-        "stallingsMaand": 11,
-        "stallingsDag": 1,
-        "stallingsUur": 11,
-        "stallingsMinuut": 20
-    },
-    {
-        "bezet": true,
-        "kaartNummer": 10,
-        "kluisNummer": 5,
-        "stallingsJaar": 2019,
-        "stallingsMaand": 11,
-        "stallingsDag": 1,
-        "stallingsUur": 11,
-        "stallingsMinuut": 20
-    },
-    {
-        "bezet": true,
-        "kaartNummer": 3,
-        "kluisNummer": 12,
-        "stallingsJaar": 2019,
-        "stallingsMaand": 11,
-        "stallingsDag": 1,
-        "stallingsUur": 11,
-        "stallingsMinuut": 20
-    },
-    {
-        "bezet": true,
-        "kaartNummer": 11,
-        "kluisNummer": 13,
-        "stallingsJaar": 2019,
-        "stallingsMaand": 11,
-        "stallingsDag": 1,
-        "stallingsUur": 11,
-        "stallingsMinuut": 20
-    },
-    {
-        "bezet": true,
-        "kaartNummer": 21,
-        "kluisNummer": 14,
-        "stallingsJaar": 2019,
-        "stallingsMaand": 11,
-        "stallingsDag": 1,
-        "stallingsUur": 11,
-        "stallingsMinuut": 48
+        "stallingsUur": 14,
+        "stallingsMinuut": 19
     }
 ]

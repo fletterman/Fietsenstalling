@@ -15,12 +15,12 @@ def kluisCheck(kaartNummer):
 
 def kluisIndex(kaartNummer):
     """controleren of een kaartnummer een kluisje gebruikt en de index van kluisje terug geven"""
-    legeKluizen = 1
+    legeKluizen = 0
     with open("fietsenstallingen.json", 'r', encoding='utf-8') as infile:
         kluisjes = json.load(infile)
     for x in kluisjes:
         if kaartNummer == x['kaartNummer']:
-            resultaat = kluisjes.index(x) + 1
+            resultaat = x['kluisNummer']
             return resultaat
         else:
             legeKluizen += 1
@@ -92,21 +92,18 @@ def huidigePrijs(kaartNummer):
     geenKluis = "U heeft geen kluis in gebruik en heeft dus ook geen kosten"
     return geenKluis
 
-#aantal jaren, maanden, dagen, uren en minuten omzetten in minuten rekening gehouden met schrikkeljaren en ant dagen in een maand.
-#alle minuten bij elkaar optellen en returenen.
 def totaalMinuten(datumDictionary):
     """Totale aantal minuten die verstreken zijn sinds 0/0/0/0/0 (J/M/D/U/M) berekenen tot de gegeven datum."""
-    som = 0
+    #lijst zodat de som makkelijk kan worden berekend door te slicen en de sum te berekenen.
     dagenInMaanden = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
-    for index in range(datumDictionary['stallingsMaand'] + 1):
-        som += dagenInMaanden[index]
+    som = sum(dagenInMaanden[:datumDictionary['stallingsMaand'] + 1])
     antMinuten = ((((som + datumDictionary['stallingsJaar'] * 365 + datumDictionary['stallingsJaar'] // 4) + datumDictionary['stallingsDag']) * 24 + datumDictionary["stallingsUur"]) * 60 + datumDictionary['stallingsMinuut'])  # ant jaar * 365 + 1 dag per vier hele jaren + ant dagen in huidige jaar
     return antMinuten
 
-#dictionary returnen met de huidige datum waarbij de stallingsmaand een int en geen afkorting is.
 def huidigeDatum():
     """Returnd de huidige datum in een dictionary volgens het volgende format Jaar/Maand/Dag/Uur/Minuut in cijfers."""
     vandaag = datetime.datetime.today()
+    #dictionary om looping te voorkomen
     maanden = {"Jan": 1, "Feb": 2, "Mar": 3, "Apr": 4, "May": 5, "Jun": 6, "Jul": 7, "Aug": 8, "Sep": 9, "Oct": 10, "Nov": 11, "Dec": 12}
     huidigeMaand, huidigeDag, huidigeJaar, huidigeUur, huidigeMinuut = vandaag.strftime('%b'), vandaag.strftime('%d'), vandaag.strftime('%Y'), vandaag.strftime("%H"), vandaag.strftime('%M')
     huidigeMaandNummer = maanden[huidigeMaand]
@@ -136,6 +133,5 @@ def stalTijd(kaartnummer):
         bericht = "U heeft geen kluisje in gebruik\n"
         return bericht
     stallingsTijd = totaalMinuten(kluisjes[locatie])
-    duur = totaalMinuten(huidigeDatum())- stallingsTijd
-    duur = int(duur)
+    duur = int(totaalMinuten(huidigeDatum())- stallingsTijd)
     return duur
