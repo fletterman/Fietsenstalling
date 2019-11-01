@@ -36,7 +36,7 @@ def volgendeBerichtOphalen(chat_id, offset, vraag, isINT, isOV):
         update_id += 1
         if bericht['result']:
             if isOV:
-                OVNUMMER = main.intOVChek(int(bericht['result'][0]['message']['text']))
+                OVNUMMER = main.intOVChek(bericht['result'][0]['message']['text'])
                 if OVNUMMER == 'geenInt':
                     sendMessage('U moet een getal opleveren bestaande alleen uit cijfers.', chat_id)
                     offset += 1
@@ -52,7 +52,7 @@ def volgendeBerichtOphalen(chat_id, offset, vraag, isINT, isOV):
                 else:
                     global ovGegeven
                     ovGegeven = True
-                    return OVNUMMER
+                    return int(bericht['result'][0]['message']['text'])
             elif isINT:
                 try:
                     NUMMER = int(bericht['result'][0]['message']['text'])

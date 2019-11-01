@@ -83,16 +83,20 @@ def kluisInleveren(kaartnummer):
     """
     with open("fietsenstallingen.json", 'r', encoding='utf-8') as infile:
         kluisjes = json.load(infile)
-    index = kluisIndex(kaartnummer)
+    index = 0
+    for x in kluisjes:
+        if kaartnummer == x['kaartNummer']:
+            kluisjes.pop(index)
+            with open("fietsenstallingen.json", 'w', encoding='utf-8') as outfile:
+                json.dump(kluisjes, outfile, ensure_ascii=False, indent=4)
+            tekst = "Uw kluis is ingeleverd"
+            return tekst
+        else:
+            index += 1
     if isinstance(index, str):
         return index
     else:
         index -= 1
-    kluisjes.pop(index)
-    with open("fietsenstallingen.json", 'w', encoding='utf-8') as outfile:
-        json.dump(kluisjes, outfile, ensure_ascii=False, indent=4)
-    tekst = "Uw kluis is ingeleverd"
-    return tekst
 
 def huidigePrijs(kaartNummer):
     """Huidige prijs berekenen per minuut door de huidige tijd in minuten min de tijd van stalling in minuten keer de prijs per minuut te doen."""
