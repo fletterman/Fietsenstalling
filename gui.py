@@ -39,15 +39,13 @@ def kostenBerekenen():
     """Berekent de kosten van de opgegeven kaart als die een kluis in gebruik heeft"""
     nummer = kostenNummer.get()
     if main.intOVChek(nummer) == 'geenInt':
-        inleveren = "Uw kaartnummer bestaat alleen uit cijfers."
-        tijdLabel["text"] = inleveren
+        kostenLabel["text"] = "Uw OV kaartnummer bestaat alleen uit cijfers."
     elif main.intOVChek(nummer) == 'negatief':
-        inleveren = "U moet een OV kaartnummer opleveren, deze zijn niet negatief."
-        tijdLabel["text"] = inleveren
+        kostenLabel["text"] = "U moet een OV kaartnummer opleveren, deze zijn niet negatief."
     elif main.intOVChek(nummer) == 'geenOV':
-        inleveren = "Uw OV is niet in onze database gevonden."
-        tijdLabel["text"] = inleveren
+        kostenLabel["text"] = "Uw OV is niet in onze database gevonden."
     else:
+        nummer = int(nummer)
         kosten = main.huidigePrijs(nummer)
         kostenLabel["text"] = kosten
 
@@ -63,18 +61,15 @@ def inleverenKluis():
     """Vraagt om een kaartnummer die gecontroleerd wordt of die een kluis heeft. Als die een kluis heeft wordt de kluis verwijdert, anders gebeurd er niets, en wordt weergegeven wat er gebeurdt is"""
     nummer = inleverenKluisEntry.get()
     if main.intOVChek(nummer) == 'geenInt':
-        inleveren = "Uw kaartnummer bestaat alleen uit cijfers."
-        tijdLabel["text"] = inleveren
+        inleverenLabel["text"] = "Uw OV kaartnummer bestaat alleen uit cijfers."
     elif main.intOVChek(nummer) == 'negatief':
-        inleveren = "U moet een OV kaartnummer opleveren, deze zijn niet negatief."
-        tijdLabel["text"] = inleveren
+        inleverenLabel["text"] = "U moet een OV kaartnummer opleveren, deze zijn niet negatief."
     elif main.intOVChek(nummer) == 'geenOV':
-        inleveren = "Uw OV is niet in onze database gevonden."
-        tijdLabel["text"] = inleveren
+        inleverenLabel["text"] = "Uw OV is niet in onze database gevonden."
     else:
         nummer = int(nummer)
-        kosten = main.huidigePrijs(nummer)
-        inleverenLabel["text"] = kosten
+        inleverenLabel["text"] = 'U heeft uw kluisje {} ingeleverd'.format(main.kluisIndex(nummer))
+        main.kluisInleveren(nummer)
 
 def tijdBerekenen():
     """Berekent de verstreken tijd sinds er iets in een kluis is gezet door de kaartnummer"""
@@ -89,6 +84,7 @@ def tijdBerekenen():
         inleveren = "Uw OV is niet in onze database gevonden."
         tijdLabel["text"] = inleveren
     else:
+        nummer = int(nummer)
         minuten = main.stalTijd(nummer)
         minutenrest = minuten % 60
         uren = minuten // 60
