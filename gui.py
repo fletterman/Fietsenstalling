@@ -1,6 +1,6 @@
-import random
+import random, main
 from tkinter import *
-import main as K
+
 
 # Toont de hoofdpagina en verbergt degene die open stond als er terug gegaan is
 def toonLoginFrame():
@@ -43,14 +43,14 @@ def kostenBerekenen():
         kostenLabel["text"] = inleveren
     else:
         nummer = int(nummer)
-        kosten = K.huidigePrijs(nummer)
+        kosten = main.huidigePrijs(nummer)
         kostenLabel["text"] = kosten
 
 # Vraagt om een random gegenereerd getal, controleert of die al een kluis in gebruik heeft en geeft het kaartnummer en het bericht dat uit de functie komt weer
 def nieuweKluis():
     nummer = nummerGenerator()
     nummer = int(nummer)
-    resultaat = K.nieuweKluis(nummer)
+    resultaat = main.nieuweKluis(nummer)
     bericht = "Uw kaartnummer is: {}\n".format(nummer) + resultaat
     nieuweKluis["text"] = bericht
 
@@ -62,7 +62,7 @@ def inleverenKluis():
         inleverenLabel["text"] = inleveren
     else:
         nummer = int(nummer)
-        inleveren = K.kluisInleveren(nummer)
+        inleveren = main.kluisInleveren(nummer)
         inleverenLabel["text"] = inleveren
 
 # Berekent de verstreken tijd sinds er iets in een kluis is gezet door de kaartnummer
@@ -73,9 +73,18 @@ def tijdBerekenen():
         tijdLabel["text"] = inleveren
     else:
         nummer = int(nummer)
-        tijd = K.stalTijd(nummer)
-        tijdBericht = "U heeft uw kluis al {} minuten in gebruik\n".format(tijd)
-        if isinstance(tijd, str):
+        minuten = main.stalTijd(nummer)
+        minutenrest = minuten % 60
+        uren = minuten // 60
+        urenrest = uren % 24
+        dagen = uren // 24
+        if dagen > 0:
+            tijdBericht = 'uw fiets staat al {} dagen en {} uur gestalt.'.format(dagen, urenrest)
+        elif uren > 0:
+            tijdBericht = 'Uw fiets staat al {} uur en {} minuten gestalt'.format(uren, minutenrest)
+        elif minuten < 60:
+            tijdBericht = 'Uw fiets staat al {} minuten gestalt.'.format(minuten)
+        if isinstance(minuten, str):
             tijdBericht = "U heeft geen kluis in gebruik\n"
             tijdLabel["text"] = tijdBericht
         else:
