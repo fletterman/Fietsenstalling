@@ -2,47 +2,47 @@ import random
 from tkinter import *
 import main as K
 
-# kluisje.kluisjecheck(2, 4)
-# runt kluisjecheck functie uit file main.py
-
+# Toont de hoofdpagina en verbergt degene die open stond als er terug gegaan is
 def toonLoginFrame():
-    hoofdframe.pack_forget()
     nieuweKluisFrame.pack_forget()
     tijdFrame.pack_forget()
     kostenFrame.pack_forget()
     inleverenKluisFrame.pack_forget()
     loginframe.pack()
 
-def toonHoofdFrame():
-    loginframe.pack_forget()
-    hoofdframe.pack()
-
+# Toont het frame voor het aanvragen van een nieuwe kluis en verbergt het hoofdframe
 def toonNieuweKluisFrame():
     loginframe.pack_forget()
     nieuweKluisFrame.pack()
 
+# Toont het frame voor het inleveren van kluizen en verbergt het hoofdframe
 def toonInleverenKluisFrame():
     loginframe.pack_forget()
     inleverenKluisFrame.pack()
 
+# Toont het frame voor het berekenen van gestalde tijd en verbergt het hoofdframe
 def toonTijdFrame():
     loginframe.pack_forget()
     tijdFrame.pack()
 
+# Toont het frame om de kosten tot nu toe te berekenen en verbergt het hoofdframe
 def toonKostenFrame():
     loginframe.pack_forget()
     kostenFrame.pack()
 
+# Genereerd een random getal van 0 tot 25 om gescande kaarten te simuleren
 def nummerGenerator():
     nummer = random.randrange(0, 25)
     return nummer
 
+# Berekent de kosten van de opgegeven kaart als die een kluis in gebruik heeft
 def kostenBerekenen():
     nummer = kostenNummer.get()
     nummer = int(nummer)
     kosten = K.huidigePrijs(nummer)
     kostenLabel["text"] = kosten
 
+# Vraagt om een random gegenereerd getal, controleert of die al een kluis in gebruik heeft en geeft het kaartnummer en het bericht dat uit de functie komt weer
 def nieuweKluis():
     nummer = nummerGenerator()
     nummer = int(nummer)
@@ -50,12 +50,14 @@ def nieuweKluis():
     bericht = "Uw kaartnummer is: {}\n".format(nummer) + resultaat
     nieuweKluis["text"] = bericht
 
+# Vraagt om een kaartnummer die gecontroleerd wordt of die een kluis heeft. Als die een kluis heeft wordt de kluis verwijdert, anders gebeurd er niets, en wordt weergegeven wat er gebeurdt is
 def inleverenKluis():
     nummer = inleverenKluisEntry.get()
     nummer = int(nummer)
     inleveren = K.kluisInleveren(nummer)
     inleverenLabel["text"] = inleveren
 
+# Berekent de verstreken tijd sinds er iets in een kluis is gezet door de kaartnummer
 def tijdBerekenen():
     nummer = tijdAanvraag.get()
     nummer = int(nummer)
@@ -68,10 +70,9 @@ def tijdBerekenen():
         bericht = tijdBericht + "Uw kaartnummer is: " + str(nummer)
         tijdLabel["text"] = bericht
 
-#Hiertussen stonden alle functies
-
 root = Tk()
 
+# Hoofdframe wordt aangemaakt met alle text, buttons en uiterlijk
 loginframe = Frame(master=root, background='yellow')
 loginframe.pack(fill="both", expand=True)
 welkom = "Welkom bij de ov-staller"
@@ -88,11 +89,7 @@ kostenButton.pack(side=LEFT, padx=10, pady=20)
 label = Label(master=loginframe, width=28, height=27, background='yellow')
 label.pack()
 
-hoofdframe = Frame(master=root, background='yellow')
-hoofdframe.pack(fill="both", expand=True)
-backbutton = Button(master=hoofdframe, text='<', command=toonLoginFrame, foreground="white", background="deep sky blue")
-backbutton.pack(padx=50, pady=20)
-
+# Frame voor nieuwe kluis aanvragen wordt aangemaakt met alle knoppen, entries (overbodig door random generator) en tekst
 nieuweKluisFrame = Frame(master=root, background='yellow')
 nieuweKluisFrame.pack(fill="both", expand=True)
 nummerField = Entry(master=nieuweKluisFrame)
@@ -104,6 +101,7 @@ backbutton.pack(padx=20, pady=20)
 nieuweKluis = Label(master=nieuweKluisFrame, text="", width=80, height=20, background='yellow')
 nieuweKluis.pack()
 
+# Frame voor het inleveren van kluizen wordt gemaakt met alle knoppen, tekst en entry
 inleverenKluisFrame = Frame(master=root, background='yellow')
 inleverenKluisFrame.pack(fill="both", expand=True)
 vraag = "Welke kaartnummer is van u?"
@@ -118,6 +116,7 @@ backbutton.pack(padx=20, pady=20)
 inleverenLabel = Label(master=inleverenKluisFrame, width=80, height=20, background='yellow')
 inleverenLabel.pack(pady=10)
 
+# Frame voor het berekenen van de verlopen tijd wordt gemaakt met alle knoppen, tekst en entry
 tijdFrame = Frame(master=root, background='yellow')
 tijdFrame.pack(fill="both", expand=True)
 vraag = "Wat is uw kaartnummer?"
@@ -132,6 +131,7 @@ backbutton.pack(padx=20, pady=20)
 tijdLabel = Label(master=tijdFrame, text="", width=80, height=20, background='yellow')
 tijdLabel.pack()
 
+# Frame voor het berekenen van de kosten wordt gemaakt met alle knoppen, tekst en entry
 kostenFrame = Frame(master=root, background='yellow')
 kosten = "Was is uw kaartnummer?"
 kostenVraag = Label(master=kostenFrame, text=kosten, background='yellow')
@@ -146,5 +146,6 @@ backbutton.pack(pady=20)
 kostenLabel = Label(master=kostenFrame, text="", width=80, height=20, background='yellow')
 kostenLabel.pack()
 
+# Main loop om de GUI te blijven runnen
 toonLoginFrame()
 root.mainloop()
