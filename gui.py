@@ -40,6 +40,9 @@ def kostenBerekenen():
     nummer = kostenNummer.get()
     try:
         nummer = int(nummer)
+        if nummer < 0:
+            inleveren = "U moet een kaartnummer geven dat 0 of hoger is"
+            tijdLabel["text"] = inleveren
         kosten = main.huidigePrijs(nummer)
         kostenLabel["text"] = kosten
     except:
@@ -70,26 +73,37 @@ def tijdBerekenen():
     nummer = tijdAanvraag.get()
     try:
         nummer = int(nummer)
-        minuten = main.stalTijd(nummer)
-        minutenrest = minuten % 60
-        uren = minuten // 60
-        urenrest = uren % 24
-        dagen = uren // 24
-        if dagen > 0:
-            tijdBericht = 'uw fiets staat al {} dagen en {} uur gestalt.'.format(dagen, urenrest)
-        elif uren > 0:
-            tijdBericht = 'Uw fiets staat al {} uur en {} minuten gestalt'.format(uren, minutenrest)
-        elif minuten < 60:
-            tijdBericht = 'Uw fiets staat al {} minuten gestalt.'.format(minuten)
-        if isinstance(minuten, str):
-            tijdBericht = "U heeft geen kluis in gebruik\n"
+        if nummer < 0:
+            inleveren = "U moet een kaartnummer geven dat 0 of hoger is"
+            tijdLabel["text"] = inleveren
+        elif main.kluisCheck(nummer)[1]:
+            minuten = main.stalTijd(nummer)
+            minutenrest = minuten % 60
+            uren = minuten // 60
+            urenrest = uren % 24
+            dagen = uren // 24
+            tijdBericht = ""
+            if dagen > 0:
+                tijdBericht = 'uw fiets staat al {} dagen en {} uur gestalt.'.format(dagen, urenrest)
+            elif uren > 0:
+                tijdBericht = 'Uw fiets staat al {} uur en {} minuten gestalt'.format(uren, minutenrest)
+            elif minuten < 60:
+                tijdBericht = 'Uw fiets staat al {} minuten gestalt.'.format(minuten)
+            if isinstance(minuten, str):
+                tijdBericht = "U heeft geen kluis in gebruik\n"
+                tijdLabel["text"] = tijdBericht
+            else:
+                bericht = tijdBericht + "Uw kaartnummer is: " + str(nummer)
+                tijdLabel["text"] = bericht
             tijdLabel["text"] = tijdBericht
         else:
-            bericht = tijdBericht + "Uw kaartnummer is: " + str(nummer)
-            tijdLabel["text"] = bericht
+            inleveren = "Uw OV kaartnummer is niet in onze database gevonden."
+            tijdLabel["text"] = inleveren
     except:
         inleveren = "Geef een cijfer als je kaartnummer en niet een string"
+
         tijdLabel["text"] = inleveren
+
 
 root = Tk()
 
