@@ -1,11 +1,11 @@
-import requests, json, kluisje
+import requests, json, main
 #kluisje import verbeteren door middel van classes in kluisje, alle onnodige junk ook uit kluisje halen.
 token = "878137494:AAFq1YmAoh4bMGXeUBPM90hTJUMNdivlqw4"
 baseurl = "https://api.telegram.org/bot{}/".format(token)
 ovGegeven, update_id, ovNummer = False, None, None
 #de bot is te bereiken met @FietsenZuilBot via telegram
 #zoek "@FietsenZuilBot" op in de search bar.
-#run bot.py op pycharm of op jouw gekozen manier met kluisje.py en fietsenstallingen.json in dezelfde folder.
+#run bot.py op pycharm of op jouw gekozen manier met main.py en fietsenstallingen.json in dezelfde folder.
 #stuur /start naar de bot. De rest spreek voor zichzelf.
 
 def getUpdates(offset=None):
@@ -34,7 +34,7 @@ def volgendeBerichtOphalen(chat_id, offset, vraag, isINT, isOV):
                     offset += 1
                     continue
                 if isOV:
-                    if kluisje.kluisCheck(1, Nummer)[1]:
+                    if main.kluisCheck(1, Nummer)[1]:
                         global ovGegeven
                         ovGegeven = True
                         return Nummer
@@ -61,18 +61,18 @@ while True:
             elif message == '/huidigeprijs':
                 if ovGegeven == False:
                     ovNummer = volgendeBerichtOphalen(chat_id, update_id, 'Wat is uw ov-chipkaartnummer?', True, True)
-                huidigePrijs = kluisje.huidigePrijs(ovNummer)
+                huidigePrijs = main.huidigePrijs(ovNummer)
                 sendMessage("Uw huidige prijs is: {:.2f} euro.".format(huidigePrijs), chat_id)
             elif message == '/mijnkluisje':
                 if ovGegeven == False:
                     ovNummer = volgendeBerichtOphalen(chat_id, update_id, 'Wat is uw ov-chipkaartnummer?', True, True)
-                sendMessage('U heeft kluisje {} in gebruik.'.format(kluisje.kluisCheck(2, ovNummer)), chat_id)
+                sendMessage('U heeft kluisje {} in gebruik.'.format(main.kluisCheck(2, ovNummer)), chat_id)
             elif message == '/resterendetijd':
                 if ovGegeven == False:
                     ovNummer = volgendeBerichtOphalen(chat_id, update_id, 'Wat is uw ov-chipkaartnummer?', True, True)
                 saldo = volgendeBerichtOphalen(chat_id, update_id, 'Wat is uw ov-chipkaart saldo?', True, False)
-                resterendeSaldo = saldo - kluisje.huidigePrijs(ovNummer)
-                urenOver = resterendeSaldo / kluisje.standaardPrijsUur
+                resterendeSaldo = saldo - main.huidigePrijs(ovNummer)
+                urenOver = resterendeSaldo / main.standaardPrijsUur
                 if urenOver > 24:
                     dagenOver = urenOver // 24
                     urenOver = urenOver % 24

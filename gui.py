@@ -1,9 +1,9 @@
 import random
 from tkinter import *
-import kluisje as K
+import main as K
 
 # kluisje.kluisjecheck(2, 4)
-# runt kluisjecheck functie uit file kluisje.py
+# runt kluisjecheck functie uit file main.py
 
 def toonLoginFrame():
     hoofdframe.pack_forget()
