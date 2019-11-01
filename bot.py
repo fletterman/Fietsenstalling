@@ -34,12 +34,19 @@ def volgendeBerichtOphalen(chat_id, offset, vraag, isINT, isOV):
                     offset += 1
                     continue
                 if isOV:
-                    global ovGegeven
-                    ovGegeven = True
+                    if kluisje.kluisCheck(1, Nummer):
+                        global ovGegeven
+                        ovGegeven = True
+                        return Nummer
+                    else:
+                        sendMessage('Uw OV is nog niet in gebruik, probeer het met een ander OV die wel in gebruik is.', chat_id)
+                        offset += 1
+                        continue
                 return Nummer
         else:
             if bericht['result']:
                 return bericht['result'][0]['message']['text']
+
 while True:
     bericht = getUpdates(offset=update_id)
     # print('hier')
@@ -69,7 +76,8 @@ while True:
                 resterendeSaldo = saldo - kluisje.huidigePrijs(ovNummer)
                 urenOver = resterendeSaldo / kluisje.standaardPrijsUur
                 if urenOver > 0:
-                    sendMessage("U kunt uw fiets nog: " + str(urenOver) + " uur stallen met uw huidige saldo.", chat_id)
+                    msg = "U kunt uw fiets nog: {:.2} uur stallen met uw huidige saldo.".format(urenOver)
+                    sendMessage(msg, chat_id)
                 else:
                     sendMessage("U komt: " + str(abs(resterendeSaldo)) + " euro tekort.", chat_id)
             elif ovGegeven == False:
