@@ -12,7 +12,9 @@ def ovscan():
                     continue
                 elif main.kluisCheck(ovNummer)[1]:
                     print("U kunt niet twee kluisjes beheren op een OV")
+                    continue
                 else:
+                    print(ovNummer)
                     return ovNummer
             except:
                 print("Kies een getal bestaande alleen uit cijfers.")

@@ -49,12 +49,12 @@ def kostenBerekenen():
         kosten = main.huidigePrijs(nummer)
         kostenLabel["text"] = kosten
 
-def nieuweKluis():
+def nieuweKluisMaken(ovNummer):
     """Vraagt om een random gegenereerd getal, controleert of die al een kluis in gebruik heeft en geeft het kaartnummer en het bericht dat uit de functie komt weer"""
-    nummer = nummerGenerator()
-    nummer = int(nummer)
-    resultaat = main.nieuweKluis(nummer)
-    bericht = "Uw kaartnummer is: {}\n".format(nummer) + resultaat
+    # nummer = nummerGenerator()
+    # nummer = int(nummer)
+    resultaat = main.nieuweKluis(ovNummer)
+    bericht = "Uw kaartnummer is: {}\n".format(ovNummer) + resultaat
     nieuweKluis["text"] = bericht
 
 def inleverenKluis():
@@ -101,6 +101,10 @@ def tijdBerekenen():
             tijdLabel["text"] = bericht
         tijdLabel["text"] = tijdBericht
 
+def ovScan():
+    random = rfid.ovscan()
+    print(random, "1")
+    nieuweKluisMaken(random)
 
 root = Tk()
 root.geometry('500x300')
@@ -126,9 +130,9 @@ label.pack()
 """Frame voor nieuwe kluis aanvragen wordt aangemaakt met alle knoppen, entries (overbodig door random generator) en tekst"""
 nieuweKluisFrame = Frame(master=root, background='yellow')
 nieuweKluisFrame.pack(fill="both", expand=True)
-kaartNummer = Button(master=nieuweKluisFrame, text='Kluis aanvragen', command=nieuweKluis, foreground="white", background="deep sky blue")
+kaartNummer = Button(master=nieuweKluisFrame, text='Kluis aanvragen', command=nieuweKluisMaken, foreground="white", background="deep sky blue")
 kaartNummer.pack(pady=20)
-rfidButton = Button(master=nieuweKluisFrame, text='Kaart scannen', command=rfid.ovscan, foreground="white", background="deep sky blue")
+rfidButton = Button(master=nieuweKluisFrame, text='Kaart scannen', command=ovScan, foreground="white", background="deep sky blue")
 rfidButton.pack(pady=20)
 backbutton = Button(master=nieuweKluisFrame, text='<', command=toonLoginFrame, foreground="white", background="deep sky blue")
 backbutton.pack(padx=20, pady=20)
