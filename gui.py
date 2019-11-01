@@ -80,14 +80,11 @@ def tijdBerekenen():
     """Berekent de verstreken tijd sinds er iets in een kluis is gezet door de kaartnummer"""
     nummer = tijdAanvraag.get()
     if main.intOVChek(nummer) == 'geenInt':
-        inleveren = "Uw kaartnummer bestaat alleen uit cijfers."
-        tijdLabel["text"] = inleveren
+        tijdLabel["text"] = "Uw kaartnummer bestaat alleen uit cijfers."
     elif main.intOVChek(nummer) == 'negatief':
-        inleveren = "U moet een OV kaartnummer opleveren, deze zijn niet negatief."
-        tijdLabel["text"] = inleveren
+        tijdLabel["text"] = "U moet een OV kaartnummer opleveren, deze zijn niet negatief."
     elif main.intOVChek(nummer) == 'geenOV':
-        inleveren = "Uw OV is niet in onze database gevonden."
-        tijdLabel["text"] = inleveren
+        tijdLabel["text"] = "Uw OV is niet in onze database gevonden."
     else:
         minuten = main.stalTijd(nummer)
         minutenrest = minuten % 60
@@ -102,8 +99,7 @@ def tijdBerekenen():
         elif minuten < 60:
             tijdBericht = 'Uw fiets staat al {} minuten gestalt.'.format(minuten)
         if isinstance(minuten, str):
-            tijdBericht = "U heeft geen kluis in gebruik\n"
-            tijdLabel["text"] = tijdBericht
+            tijdLabel["text"] = "U heeft geen kluis in gebruik\n"
         else:
             bericht = tijdBericht + "Uw kaartnummer is: " + str(nummer)
             tijdLabel["text"] = bericht
