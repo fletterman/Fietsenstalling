@@ -1,12 +1,6 @@
 import json, datetime
-# from tkinter import *
-
-# def clicked():
-#     bericht = 'Dit een bericht voor de gebruiker!'
-#     showinfo(title='popup', message=bericht)
 
 vandaag = datetime.datetime.today()
-beheerder = 111
 standaardPrijsUur = 0.30
 standaardPrijsMinuut = standaardPrijsUur / 60
 
@@ -29,7 +23,7 @@ def kluisCheck(optie, kaartNummer):
             else:
                 legeKluizen += 1
                 if legeKluizen == len(kluisjes):
-                    resultaat = "U heeft geen kluis in gebruik"
+                    resultaat = False
                     return resultaat
 
 def nieuweKluis(kaartNummer):
@@ -126,12 +120,6 @@ def stalTijd(kaartnummer):
     stallingsTijd = totaalMinuten(kluisjes[locatie])
     duur = huidigeTijd - stallingsTijd
     return duur
-
-# root = Tk()
-# button = Button(master=root, text='Druk hier', command=clicked)
-# button.pack(pady=10)
-#
-# root.mainloop()
 
 
 '''hieronder is de console test code, deze is nu obsolete'''
