@@ -38,16 +38,18 @@ def nummerGenerator():
 def kostenBerekenen():
     """Berekent de kosten van de opgegeven kaart als die een kluis in gebruik heeft"""
     nummer = kostenNummer.get()
-    try:
-        nummer = int(nummer)
-        if nummer < 0:
-            inleveren = "U moet een kaartnummer geven dat 0 of hoger is"
-            tijdLabel["text"] = inleveren
+    if main.intOVChek(nummer) == 'geenInt':
+        inleveren = "Uw kaartnummer bestaat alleen uit cijfers."
+        tijdLabel["text"] = inleveren
+    elif main.intOVChek(nummer) == 'negatief':
+        inleveren = "U moet een OV kaartnummer opleveren, deze zijn niet negatief."
+        tijdLabel["text"] = inleveren
+    elif main.intOVChek(nummer) == 'geenOV':
+        inleveren = "Uw OV is niet in onze database gevonden."
+        tijdLabel["text"] = inleveren
+    else:
         kosten = main.huidigePrijs(nummer)
         kostenLabel["text"] = kosten
-    except:
-        inleveren = "Geef een cijfer als je kaartnummer en niet een string"
-        kostenLabel["text"] = inleveren
 
 def nieuweKluis():
     """Vraagt om een random gegenereerd getal, controleert of die al een kluis in gebruik heeft en geeft het kaartnummer en het bericht dat uit de functie komt weer"""
@@ -60,49 +62,52 @@ def nieuweKluis():
 def inleverenKluis():
     """Vraagt om een kaartnummer die gecontroleerd wordt of die een kluis heeft. Als die een kluis heeft wordt de kluis verwijdert, anders gebeurd er niets, en wordt weergegeven wat er gebeurdt is"""
     nummer = inleverenKluisEntry.get()
-    try:
+    if main.intOVChek(nummer) == 'geenInt':
+        inleveren = "Uw kaartnummer bestaat alleen uit cijfers."
+        tijdLabel["text"] = inleveren
+    elif main.intOVChek(nummer) == 'negatief':
+        inleveren = "U moet een OV kaartnummer opleveren, deze zijn niet negatief."
+        tijdLabel["text"] = inleveren
+    elif main.intOVChek(nummer) == 'geenOV':
+        inleveren = "Uw OV is niet in onze database gevonden."
+        tijdLabel["text"] = inleveren
+    else:
         nummer = int(nummer)
         kosten = main.huidigePrijs(nummer)
         inleverenLabel["text"] = kosten
-    except:
-        inleveren = "Geef een cijfer als je kaartnummer en niet een string"
-        inleverenLabel["text"] = inleveren
 
 def tijdBerekenen():
     """Berekent de verstreken tijd sinds er iets in een kluis is gezet door de kaartnummer"""
     nummer = tijdAanvraag.get()
-    try:
-        nummer = int(nummer)
-        if nummer < 0:
-            inleveren = "U moet een kaartnummer geven dat 0 of hoger is"
-            tijdLabel["text"] = inleveren
-        elif main.kluisCheck(nummer)[1]:
-            minuten = main.stalTijd(nummer)
-            minutenrest = minuten % 60
-            uren = minuten // 60
-            urenrest = uren % 24
-            dagen = uren // 24
-            tijdBericht = ""
-            if dagen > 0:
-                tijdBericht = 'uw fiets staat al {} dagen en {} uur gestalt.'.format(dagen, urenrest)
-            elif uren > 0:
-                tijdBericht = 'Uw fiets staat al {} uur en {} minuten gestalt'.format(uren, minutenrest)
-            elif minuten < 60:
-                tijdBericht = 'Uw fiets staat al {} minuten gestalt.'.format(minuten)
-            if isinstance(minuten, str):
-                tijdBericht = "U heeft geen kluis in gebruik\n"
-                tijdLabel["text"] = tijdBericht
-            else:
-                bericht = tijdBericht + "Uw kaartnummer is: " + str(nummer)
-                tijdLabel["text"] = bericht
+    if main.intOVChek(nummer) == 'geenInt':
+        inleveren = "Uw kaartnummer bestaat alleen uit cijfers."
+        tijdLabel["text"] = inleveren
+    elif main.intOVChek(nummer) == 'negatief':
+        inleveren = "U moet een OV kaartnummer opleveren, deze zijn niet negatief."
+        tijdLabel["text"] = inleveren
+    elif main.intOVChek(nummer) == 'geenOV':
+        inleveren = "Uw OV is niet in onze database gevonden."
+        tijdLabel["text"] = inleveren
+    else:
+        minuten = main.stalTijd(nummer)
+        minutenrest = minuten % 60
+        uren = minuten // 60
+        urenrest = uren % 24
+        dagen = uren // 24
+        tijdBericht = ""
+        if dagen > 0:
+            tijdBericht = 'uw fiets staat al {} dagen en {} uur gestalt.'.format(dagen, urenrest)
+        elif uren > 0:
+            tijdBericht = 'Uw fiets staat al {} uur en {} minuten gestalt'.format(uren, minutenrest)
+        elif minuten < 60:
+            tijdBericht = 'Uw fiets staat al {} minuten gestalt.'.format(minuten)
+        if isinstance(minuten, str):
+            tijdBericht = "U heeft geen kluis in gebruik\n"
             tijdLabel["text"] = tijdBericht
         else:
-            inleveren = "Uw OV kaartnummer is niet in onze database gevonden."
-            tijdLabel["text"] = inleveren
-    except:
-        inleveren = "Geef een cijfer als je kaartnummer en niet een string"
-
-        tijdLabel["text"] = inleveren
+            bericht = tijdBericht + "Uw kaartnummer is: " + str(nummer)
+            tijdLabel["text"] = bericht
+        tijdLabel["text"] = tijdBericht
 
 
 root = Tk()

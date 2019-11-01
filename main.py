@@ -2,6 +2,19 @@ import json, datetime
 
 standaardPrijsUur = 0.30
 
+def intOVChek(OVKaartNummer):
+    try:
+        OVKaartNummer = int(OVKaartNummer)
+        if OVKaartNummer < 0:
+            return 'negatief'
+        elif kluisCheck(OVKaartNummer)[1]:
+            return OVKaartNummer
+        else:
+            return 'geenOV'
+    except:
+        return 'geenInt'
+
+
 def kluisCheck(kaartNummer):
     """Controleren of een kaartnummer al gebruikt maakt van een kluis."""
     with open("fietsenstallingen.json", 'r', encoding='utf-8') as infile:
