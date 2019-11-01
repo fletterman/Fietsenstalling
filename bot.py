@@ -34,7 +34,7 @@ def volgendeBerichtOphalen(chat_id, offset, vraag, isINT, isOV):
                     offset += 1
                     continue
                 if isOV:
-                    if kluisje.kluisCheck(1, Nummer)[1] == False:
+                    if kluisje.kluisCheck(1, Nummer)[1]:
                         global ovGegeven
                         ovGegeven = True
                         return Nummer
@@ -49,7 +49,6 @@ def volgendeBerichtOphalen(chat_id, offset, vraag, isINT, isOV):
 
 while True:
     bericht = getUpdates(offset=update_id)
-    # print('hier')
     bericht = bericht["result"]
     if bericht:
         for item in bericht:
@@ -63,23 +62,25 @@ while True:
                 if ovGegeven == False:
                     ovNummer = volgendeBerichtOphalen(chat_id, update_id, 'Wat is uw ov-chipkaartnummer?', True, True)
                 huidigePrijs = kluisje.huidigePrijs(ovNummer)
-                sendMessage("Uw huidige prijs is: "+ str(huidigePrijs) + " euro.", chat_id)
+                sendMessage("Uw huidige prijs is: {:.2f} euro.".format(huidigePrijs), chat_id)
             elif message == '/mijnkluisje':
                 if ovGegeven == False:
                     ovNummer = volgendeBerichtOphalen(chat_id, update_id, 'Wat is uw ov-chipkaartnummer?', True, True)
-                yz = kluisje.kluisCheck(2, ovNummer)
-                sendMessage('U heeft kluisje: ' + str(yz) + ' in gebruik.', chat_id)
+                sendMessage('U heeft kluisje {} in gebruik.'.format(kluisje.kluisCheck(2, ovNummer)), chat_id)
             elif message == '/resterendetijd':
                 if ovGegeven == False:
                     ovNummer = volgendeBerichtOphalen(chat_id, update_id, 'Wat is uw ov-chipkaartnummer?', True, True)
                 saldo = volgendeBerichtOphalen(chat_id, update_id, 'Wat is uw ov-chipkaart saldo?', True, False)
                 resterendeSaldo = saldo - kluisje.huidigePrijs(ovNummer)
                 urenOver = resterendeSaldo / kluisje.standaardPrijsUur
-                if urenOver > 0:
-                    msg = "U kunt uw fiets nog: {:.2} uur stallen met uw huidige saldo.".format(urenOver)
-                    sendMessage(msg, chat_id)
+                if urenOver > 24:
+                    dagenOver = urenOver // 24
+                    urenOver = urenOver % 24
+                    sendMessage("U kunt uw fiets nog: {} dagen en {:.1f} uur stallen met uw huidige saldo.".format(int(dagenOver), urenOver), chat_id)
+                elif urenOver > 0:
+                    sendMessage("U kunt uw fiets nog: {:.2f} uur stallen met uw huidige saldo.".format(urenOver), chat_id)
                 else:
-                    sendMessage("U komt: " + str(abs(resterendeSaldo)) + " euro tekort.", chat_id)
+                    sendMessage("U komt: {:.2f} euro tekort.".format(abs(resterendeSaldo)), chat_id)
             elif ovGegeven == False:
                 sendMessage('Met "/start" (zonder aanhalingstekens) kunt u beginnen.', chat_id)
             else:
