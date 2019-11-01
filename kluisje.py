@@ -120,6 +120,9 @@ def stalTijd(kaartnummer):
             locatie = kluisjes.index(x)
         else:
             teller += 1
+    if teller == len(kluisjes) - 1:
+        bericht = "U heeft geen kluisje in gebruik"
+        return bericht
     stallingsTijd = totaalMinuten(kluisjes[locatie])
     duur = huidigeTijd - stallingsTijd
     return duur

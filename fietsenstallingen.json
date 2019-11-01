@@ -1,66 +1,6 @@
 [
     {
         "bezet": true,
-        "kaartNummer": 8,
-        "kluisNummer": 2,
-        "stallingsJaar": 2019,
-        "stallingsMaand": 9,
-        "stallingsDag": 13,
-        "stallingsUur": 2,
-        "stallingsMinuut": 7
-    },
-    {
-        "bezet": true,
-        "kaartNummer": 11,
-        "kluisNummer": 3,
-        "stallingsJaar": 2019,
-        "stallingsMaand": 10,
-        "stallingsDag": 29,
-        "stallingsUur": 14,
-        "stallingsMinuut": 12
-    },
-    {
-        "bezet": true,
-        "kaartNummer": 12,
-        "kluisNummer": 4,
-        "stallingsJaar": 2019,
-        "stallingsMaand": 10,
-        "stallingsDag": 29,
-        "stallingsUur": 14,
-        "stallingsMinuut": 22
-    },
-    {
-        "bezet": true,
-        "kaartNummer": 15,
-        "kluisNummer": 6,
-        "stallingsJaar": 2019,
-        "stallingsMaand": 10,
-        "stallingsDag": 29,
-        "stallingsUur": 14,
-        "stallingsMinuut": 23
-    },
-    {
-        "bezet": true,
-        "kaartNummer": 7,
-        "kluisNummer": 7,
-        "stallingsJaar": 2019,
-        "stallingsMaand": 10,
-        "stallingsDag": 31,
-        "stallingsUur": 13,
-        "stallingsMinuut": 10
-    },
-    {
-        "bezet": true,
-        "kaartNummer": 1,
-        "kluisNummer": 1,
-        "stallingsJaar": 2019,
-        "stallingsMaand": 10,
-        "stallingsDag": 31,
-        "stallingsUur": 13,
-        "stallingsMinuut": 38
-    },
-    {
-        "bezet": true,
         "kaartNummer": 100,
         "kluisNummer": 8,
         "stallingsJaar": 2019,
@@ -71,22 +11,82 @@
     },
     {
         "bezet": true,
-        "kaartNummer": 3,
-        "kluisNummer": 5,
+        "kaartNummer": 20,
+        "kluisNummer": 10,
         "stallingsJaar": 2019,
-        "stallingsMaand": 10,
-        "stallingsDag": 31,
-        "stallingsUur": 13,
-        "stallingsMinuut": 50
+        "stallingsMaand": 11,
+        "stallingsDag": 1,
+        "stallingsUur": 10,
+        "stallingsMinuut": 25
     },
     {
         "bezet": true,
-        "kaartNummer": 2,
+        "kaartNummer": 16,
+        "kluisNummer": 16,
+        "stallingsJaar": 2019,
+        "stallingsMaand": 11,
+        "stallingsDag": 1,
+        "stallingsUur": 10,
+        "stallingsMinuut": 25
+    },
+    {
+        "bezet": true,
+        "kaartNummer": 17,
+        "kluisNummer": 19,
+        "stallingsJaar": 2019,
+        "stallingsMaand": 11,
+        "stallingsDag": 1,
+        "stallingsUur": 10,
+        "stallingsMinuut": 25
+    },
+    {
+        "bezet": true,
+        "kaartNummer": 5,
+        "kluisNummer": 7,
+        "stallingsJaar": 2019,
+        "stallingsMaand": 11,
+        "stallingsDag": 1,
+        "stallingsUur": 4,
+        "stallingsMinuut": 27
+    },
+    {
+        "bezet": true,
+        "kaartNummer": 13,
+        "kluisNummer": 2,
+        "stallingsJaar": 2019,
+        "stallingsMaand": 11,
+        "stallingsDag": 1,
+        "stallingsUur": 15,
+        "stallingsMinuut": 27
+    },
+    {
+        "bezet": true,
+        "kaartNummer": 15,
+        "kluisNummer": 6,
+        "stallingsJaar": 2019,
+        "stallingsMaand": 11,
+        "stallingsDag": 1,
+        "stallingsUur": 0,
+        "stallingsMinuut": 27
+    },
+    {
+        "bezet": true,
+        "kaartNummer": 4,
         "kluisNummer": 9,
         "stallingsJaar": 2019,
-        "stallingsMaand": 10,
-        "stallingsDag": 31,
-        "stallingsUur": 14,
-        "stallingsMinuut": 6
+        "stallingsMaand": 11,
+        "stallingsDag": 1,
+        "stallingsUur": 3,
+        "stallingsMinuut": 29
+    },
+    {
+        "bezet": true,
+        "kaartNummer": 23,
+        "kluisNummer": 11,
+        "stallingsJaar": 2019,
+        "stallingsMaand": 11,
+        "stallingsDag": 1,
+        "stallingsUur": 10,
+        "stallingsMinuut": 29
     }
 ]
