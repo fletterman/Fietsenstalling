@@ -1,4 +1,4 @@
-import random, main
+import random, main, rfid
 from tkinter import *
 
 
@@ -128,6 +128,8 @@ nieuweKluisFrame = Frame(master=root, background='yellow')
 nieuweKluisFrame.pack(fill="both", expand=True)
 kaartNummer = Button(master=nieuweKluisFrame, text='Kluis aanvragen', command=nieuweKluis, foreground="white", background="deep sky blue")
 kaartNummer.pack(pady=20)
+rfidButton = Button(master=nieuweKluisFrame, text='Kaart scannen', command=rfid.ovscan, foreground="white", background="deep sky blue")
+rfidButton.pack(pady=20)
 backbutton = Button(master=nieuweKluisFrame, text='<', command=toonLoginFrame, foreground="white", background="deep sky blue")
 backbutton.pack(padx=20, pady=20)
 nieuweKluis = Label(master=nieuweKluisFrame, text="", width=80, height=20, background='yellow')
@@ -143,6 +145,8 @@ inleverenKluisEntry = Entry(master=inleverenKluisFrame)
 inleverenKluisEntry.pack(pady=5)
 inleverenKluisButton = Button(master=inleverenKluisFrame, text='Volgende', command=inleverenKluis, foreground="white", background="deep sky blue")
 inleverenKluisButton.pack(pady=10)
+rfidInleverButton = Button(master=inleverenKluisFrame, text='Kaart scannen', command=rfid.ovscan, foreground="white", background="deep sky blue")
+rfidButton.pack(pady=20)
 backbutton = Button(master=inleverenKluisFrame, text='<', command=toonLoginFrame, foreground="white", background="deep sky blue")
 backbutton.pack(padx=20, pady=20)
 inleverenLabel = Label(master=inleverenKluisFrame, width=80, height=20, background='yellow')
