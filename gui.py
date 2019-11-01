@@ -111,6 +111,8 @@ def tijdBerekenen():
 
 
 root = Tk()
+root.geometry('500x300')
+root.resizable(False,False)
 
 """Hoofdframe wordt aangemaakt met alle text, buttons en uiterlijk"""
 loginframe = Frame(master=root, background='yellow')
