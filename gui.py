@@ -1,5 +1,6 @@
-import kluisje as K
+import random
 from tkinter import *
+import kluisje as K
 
 # kluisje.kluisjecheck(2, 4)
 # runt kluisjecheck functie uit file kluisje.py
@@ -32,29 +33,38 @@ def toonKostenFrame():
     loginframe.pack_forget()
     kostenFrame.pack()
 
+def nummerGenerator():
+    nummer = random.randrange(0,25)
+    return nummer
+
 def kostenBerekenen():
-    nummer = kaartnummer.get()
+    nummer = nummerGenerator()
     nummer = int(nummer)
     kosten = K.huidigePrijs(nummer)
     kostenLabel["text"] = kosten
 
 def nieuweKluis():
-    nummer = nummerField.get()
+    nummer = nummerGenerator()
     nummer = int(nummer)
     resultaat = K.nieuweKluis(nummer)
     nieuweKluis["text"] = resultaat
 
 def inleverenKluis():
-    nummer = inleverenKluisEntry.get()
+    nummer = nummerGenerator()
     nummer = int(nummer)
     inleveren = K.kluisInleveren(nummer)
-    label["text"] = inleveren
+    inleverenLabel["text"] = inleveren
 
 def tijdBerekenen():
-    nummer = tijdAanvraag.get()
+    nummer = nummerGenerator()
     nummer = int(nummer)
     tijd = K.stalTijd(nummer)
-    tijdLabel["text"] = tijd
+    tijdBericht = "U heeft uw kluis al {} minuten in gebruik\n".format(tijd)
+    if isinstance(tijd, str):
+        tijdBericht = "U heeft geen kluis in gebruik"
+        tijdLabel["text"] = tijdBericht
+    bericht = tijdBericht + "Uw kaartnummer is: " + str(nummer)
+    tijdLabel["text"] = bericht
 
 #Hiertussen stonden alle functies
 
@@ -103,8 +113,8 @@ inleverenKluisButton = Button(master=inleverenKluisFrame, text='Volgende', comma
 inleverenKluisButton.pack(pady=10)
 backbutton = Button(master=inleverenKluisFrame, text='<', command=toonLoginFrame)
 backbutton.pack(padx=20, pady=20)
-label = Label(master=inleverenKluisFrame, width=80, height=20, background='yellow')
-label.pack(pady=10)
+inleverenLabel = Label(master=inleverenKluisFrame, width=80, height=20, background='yellow')
+inleverenLabel.pack(pady=10)
 
 tijdFrame = Frame(master=root, background='yellow')
 tijdFrame.pack(fill="both", expand=True)
