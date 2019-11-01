@@ -32,70 +32,56 @@ def toonKostenFrame():
     loginframe.pack_forget()
     kostenFrame.pack()
 
-# def login():
-#     if loginfield.get() == "admin":
-#         toonHoofdFrame()
-#     elif loginfield.get() == "1":
-#         toonNieuweKluisFrame()
-#     elif loginfield.get() == "4":
-#         toonTijdFrame()
-#     elif loginfield.get() == "2":
-#         toonKostenFrame()
-#     else:
-#         print('Verkeerde gebruikersnaam!')
-
 def kostenBerekenen():
     nummer = kaartnummer.get()
     nummer = int(nummer)
     kosten = K.huidigePrijs(nummer)
-    label = Label(master=kostenFrame, text=kosten, width=50, height=20)
-    label.pack()
+    kostenLabel["text"] = kosten
 
 def nieuweKluis():
     nummer = nummerField.get()
     nummer = int(nummer)
     resultaat = K.nieuweKluis(nummer)
-    label = Label(master=nieuweKluisFrame, text=resultaat)
-    label.pack()
+    nieuweKluis["text"] = resultaat
 
 def inleverenKluis():
     nummer = inleverenKluisEntry.get()
     nummer = int(nummer)
     inleveren = K.kluisInleveren(nummer)
-    label = Label(master=inleverenKluisFrame, text=inleveren)
-    label.pack()
+    label["text"] = inleveren
 
 def tijdBerekenen():
     nummer = tijdAanvraag.get()
     nummer = int(nummer)
     tijd = K.stalTijd(nummer)
-    label = Label(master=tijdFrame, text=tijd)
-    label.pack()
+    tijdLabel["text"] = tijd
 
 #Hiertussen stonden alle functies
 
 root = Tk()
 
-loginframe = Frame(master=root)
+loginframe = Frame(master=root, background='yellow')
 loginframe.pack(fill="both", expand=True)
-
+welkom = "Welkom bij de ov-staller"
+welkomLabel = Label(master=loginframe, text=welkom, background='yellow')
+welkomLabel.pack(pady=10)
 nieuweKluisButton = Button(master=loginframe, text='Nieuwe kluis', command=toonNieuweKluisFrame)
-nieuweKluisButton.pack(side=LEFT, padx=50, pady=20)
+nieuweKluisButton.pack(side=LEFT, padx=10, pady=20)
 inleverenKluisButton = Button(master=loginframe, text='Kluis inleveren', command=toonInleverenKluisFrame)
-inleverenKluisButton.pack(side=LEFT, padx=50, pady=20)
+inleverenKluisButton.pack(side=LEFT, padx=10, pady=20)
 tijdButton = Button(master=loginframe, text="Bereken tijd", command=toonTijdFrame)
-tijdButton.pack(side=LEFT, padx=50, pady=20)
+tijdButton.pack(side=LEFT, padx=10, pady=20)
 kostenButton = Button(master=loginframe, text="Bereken kosten", command=toonKostenFrame)
-kostenButton.pack(side=LEFT, padx=50, pady=20)
-label = Label(master=loginframe, width=20, height=20)
+kostenButton.pack(side=LEFT, padx=10, pady=20)
+label = Label(master=loginframe, width=10, height=20, background='yellow')
 label.pack()
 
-hoofdframe = Frame(master=root)
+hoofdframe = Frame(master=root, background='yellow')
 hoofdframe.pack(fill="both", expand=True)
 backbutton = Button(master=hoofdframe, text='<', command=toonLoginFrame)
 backbutton.pack(padx=50, pady=20)
 
-nieuweKluisFrame = Frame(master=root)
+nieuweKluisFrame = Frame(master=root, background='yellow')
 nieuweKluisFrame.pack(fill="both", expand=True)
 nummerField = Entry(master=nieuweKluisFrame)
 nummerField.pack(pady=20)
@@ -103,25 +89,27 @@ kaartNummer = Button(master=nieuweKluisFrame, text='Volgende', command=nieuweKlu
 kaartNummer.pack(pady=10)
 backbutton = Button(master=nieuweKluisFrame, text='<', command=toonLoginFrame)
 backbutton.pack(padx=20, pady=20)
-label = Label(master=nieuweKluisFrame, width=50, height=5)
-label.pack()
+nieuweKluis = Label(master=nieuweKluisFrame, text="", width=80, height=20, background='yellow')
+nieuweKluis.pack()
 
-inleverenKluisFrame = Frame(master=root)
+inleverenKluisFrame = Frame(master=root, background='yellow')
 inleverenKluisFrame.pack(fill="both", expand=True)
 vraag = "Welke kaartnummer is van u?"
-label = Label(master=inleverenKluisFrame, text=vraag)
-label.pack(pady=10)
+vraagLabel = Label(master=inleverenKluisFrame, text=vraag, background='yellow')
+vraagLabel.pack()
 inleverenKluisEntry = Entry(master=inleverenKluisFrame)
 inleverenKluisEntry.pack(pady=5)
 inleverenKluisButton = Button(master=inleverenKluisFrame, text='Volgende', command=inleverenKluis)
-inleverenKluisButton.pack()
+inleverenKluisButton.pack(pady=10)
 backbutton = Button(master=inleverenKluisFrame, text='<', command=toonLoginFrame)
 backbutton.pack(padx=20, pady=20)
+label = Label(master=inleverenKluisFrame, width=80, height=20, background='yellow')
+label.pack(pady=10)
 
-tijdFrame = Frame(master=root)
+tijdFrame = Frame(master=root, background='yellow')
 tijdFrame.pack(fill="both", expand=True)
 vraag = "Wat is uw kaartnummer?"
-label = Label(master=tijdFrame, text=vraag)
+label = Label(master=tijdFrame, text=vraag, background='yellow')
 label.pack(pady=10)
 tijdAanvraag = Entry(master=tijdFrame)
 tijdAanvraag.pack(pady=5)
@@ -129,17 +117,22 @@ tijdAanvraagButton = Button(master=tijdFrame, text='Volgende', command=tijdBerek
 tijdAanvraagButton.pack(pady=5)
 backbutton = Button(master=tijdFrame, text='<', command=toonLoginFrame)
 backbutton.pack(padx=20, pady=20)
+tijdLabel = Label(master=tijdFrame, text="", width=80, height=20, background='yellow')
+tijdLabel.pack()
 
-kostenFrame = Frame(master=root)
+kostenFrame = Frame(master=root, background='yellow')
+kosten = "Was is uw kaartnummer?"
+kostenVraag = Label(master=kostenFrame, text=kosten, background='yellow')
+kostenVraag.pack(pady=10)
 kostenFrame.pack(fill="both", expand=True)
 kaartnummer = Entry(master=kostenFrame)
 kaartnummer.pack(pady=10)
-nummerButton = Button(master=kostenFrame, text='Volgende', command=kostenBerekenen)
+nummerButton = Button(master=kostenFrame, text='Volgende', command=kostenBerekenen, background='blue')
 nummerButton.pack(pady=20)
 backbutton = Button(master=kostenFrame, text='<', command=toonLoginFrame)
 backbutton.pack(pady=20)
-label = Label(master=kostenFrame, width=50, height=5)
-label.pack()
+kostenLabel = Label(master=kostenFrame, text="", width=80, height=20, background='yellow')
+kostenLabel.pack()
 
 toonLoginFrame()
 root.mainloop()

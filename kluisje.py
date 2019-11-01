@@ -11,14 +11,16 @@ standaardPrijsUur = 0.30
 standaardPrijsMinuut = standaardPrijsUur / 60
 
 def kluisCheck(optie, kaartNummer):
-    legeKluizen = 0
+    legeKluizen = 1
     with open("fietsenstallingen.json", 'r', encoding='utf-8') as infile:
         kluisjes = json.load(infile)
     if optie == 1:
         for x in kluisjes:
             if kaartNummer == x['kaartNummer']:
-                print("U mag maar 1 kluis in gebruik hebben. Leeg uw kluis eerst voordat u een nieuwe aanvraagt")
-                return True
+                resultaat = ["U mag maar 1 kluis in gebruik hebben. Leeg uw kluis eerst voordat u een nieuwe aanvraagt", True]
+                return resultaat
+        resultaat = ["", False]
+        return resultaat
     if optie == 2:
         for x in kluisjes:
             if kaartNummer == x['kaartNummer']:
@@ -34,8 +36,9 @@ def nieuweKluis(kaartNummer):
     teller = 1
     with open("fietsenstallingen.json", 'r', encoding='utf-8') as infile:
         kluisjes = json.load(infile)
-    if kluisCheck(1, kaartNummer):
-        return "\n"
+    test = kluisCheck(1,kaartNummer)
+    if test[1]:
+        return test[0]
     dictionary = huidigeDatum()
     dictionary['bezet'] = True
     dictionary['kluisNummer'] = len(kluisjes) + 1
@@ -52,7 +55,7 @@ def nieuweKluis(kaartNummer):
             break
     dictionary['kaartNummer'] = kaartNummer
     kluisjes.append(dictionary)
-    resultaat = "U heeft kluisje: {}".format(len(kluisjes))
+    resultaat = "U heeft kluisje: {}".format(dictionary['kluisNummer'])
     with open("fietsenstallingen.json", 'w', encoding='utf-8') as outfile:
         json.dump(kluisjes, outfile, ensure_ascii=False, indent=4)
     return resultaat
@@ -60,7 +63,11 @@ def nieuweKluis(kaartNummer):
 def kluisInleveren(kaartnummer):
     with open("fietsenstallingen.json", 'r', encoding='utf-8') as infile:
         kluisjes = json.load(infile)
-    index = kluisCheck(2, kaartnummer) - 1
+    index = kluisCheck(2, kaartnummer)
+    if isinstance(index, str):
+        return index
+    else:
+        index -= 1
     kluisjes.pop(index)
     with open("fietsenstallingen.json", 'w', encoding='utf-8') as outfile:
         json.dump(kluisjes, outfile, ensure_ascii=False, indent=4)
@@ -74,6 +81,8 @@ def huidigePrijs(kaartNummer):
         if kaartNummer == x["kaartNummer"]:
             prijs = (totaalMinuten(huidigeDatum()) - totaalMinuten(x)) * standaardPrijsMinuut
             return prijs
+    geenKluis = "U heeft geen kluis in gebruik en heeft dus ook geen kosten"
+    return geenKluis
 
 def totaalMinuten(datumDictionary):
     som = 0
@@ -103,14 +112,14 @@ def stalTijd(kaartnummer):
     datumDictionary = huidigeDatum()
     huidigeTijd = totaalMinuten(datumDictionary)
     locatie = 0
+    teller = 0
     with open('fietsenstallingen.json', 'r', encoding='utf-8') as infile:
         kluisjes = json.load(infile)
     for x in kluisjes:
         if kaartnummer == x['kaartNummer']:
             locatie = kluisjes.index(x)
         else:
-            resultaat = "Deze kaart gebruikt geen kluis"
-            return resultaat
+            teller += 1
     stallingsTijd = totaalMinuten(kluisjes[locatie])
     duur = huidigeTijd - stallingsTijd
     return duur
