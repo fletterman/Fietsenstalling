@@ -34,11 +34,11 @@ def toonKostenFrame():
     kostenFrame.pack()
 
 def nummerGenerator():
-    nummer = random.randrange(0,25)
+    nummer = random.randrange(0, 25)
     return nummer
 
 def kostenBerekenen():
-    nummer = nummerGenerator()
+    nummer = kostenNummer.get()
     nummer = int(nummer)
     kosten = K.huidigePrijs(nummer)
     kostenLabel["text"] = kosten
@@ -47,16 +47,17 @@ def nieuweKluis():
     nummer = nummerGenerator()
     nummer = int(nummer)
     resultaat = K.nieuweKluis(nummer)
-    nieuweKluis["text"] = resultaat
+    bericht = "Uw kaartnummer is: {}\n".format(nummer) + resultaat
+    nieuweKluis["text"] = bericht
 
 def inleverenKluis():
-    nummer = nummerGenerator()
+    nummer = inleverenKluisEntry.get()
     nummer = int(nummer)
     inleveren = K.kluisInleveren(nummer)
     inleverenLabel["text"] = inleveren
 
 def tijdBerekenen():
-    nummer = nummerGenerator()
+    nummer = tijdAanvraag.get()
     nummer = int(nummer)
     tijd = K.stalTijd(nummer)
     tijdBericht = "U heeft uw kluis al {} minuten in gebruik\n".format(tijd)
@@ -135,8 +136,8 @@ kosten = "Was is uw kaartnummer?"
 kostenVraag = Label(master=kostenFrame, text=kosten, background='yellow')
 kostenVraag.pack(pady=10)
 kostenFrame.pack(fill="both", expand=True)
-kaartnummer = Entry(master=kostenFrame)
-kaartnummer.pack(pady=10)
+kostenNummer = Entry(master=kostenFrame)
+kostenNummer.pack(pady=10)
 nummerButton = Button(master=kostenFrame, text='Volgende', command=kostenBerekenen, background='blue')
 nummerButton.pack(pady=20)
 backbutton = Button(master=kostenFrame, text='<', command=toonLoginFrame)

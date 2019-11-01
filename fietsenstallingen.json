@@ -88,5 +88,65 @@
         "stallingsDag": 1,
         "stallingsUur": 10,
         "stallingsMinuut": 29
+    },
+    {
+        "bezet": true,
+        "kaartNummer": 22,
+        "kluisNummer": 1,
+        "stallingsJaar": 2019,
+        "stallingsMaand": 11,
+        "stallingsDag": 1,
+        "stallingsUur": 11,
+        "stallingsMinuut": 3
+    },
+    {
+        "bezet": true,
+        "kaartNummer": 19,
+        "kluisNummer": 3,
+        "stallingsJaar": 2019,
+        "stallingsMaand": 11,
+        "stallingsDag": 1,
+        "stallingsUur": 11,
+        "stallingsMinuut": 20
+    },
+    {
+        "bezet": true,
+        "kaartNummer": 2,
+        "kluisNummer": 4,
+        "stallingsJaar": 2019,
+        "stallingsMaand": 11,
+        "stallingsDag": 1,
+        "stallingsUur": 11,
+        "stallingsMinuut": 20
+    },
+    {
+        "bezet": true,
+        "kaartNummer": 10,
+        "kluisNummer": 5,
+        "stallingsJaar": 2019,
+        "stallingsMaand": 11,
+        "stallingsDag": 1,
+        "stallingsUur": 11,
+        "stallingsMinuut": 20
+    },
+    {
+        "bezet": true,
+        "kaartNummer": 3,
+        "kluisNummer": 12,
+        "stallingsJaar": 2019,
+        "stallingsMaand": 11,
+        "stallingsDag": 1,
+        "stallingsUur": 11,
+        "stallingsMinuut": 20
+    },
+    {
+        "bezet": true,
+        "kaartNummer": 11,
+        "kluisNummer": 13,
+        "stallingsJaar": 2019,
+        "stallingsMaand": 11,
+        "stallingsDag": 1,
+        "stallingsUur": 11,
+        "stallingsMinuut": 20
     }
 ]
