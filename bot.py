@@ -34,30 +34,34 @@ def volgendeBerichtOphalen(chat_id, offset, vraag, isINT, isOV):
         bericht = getUpdates(offset=offset)
         global update_id
         update_id += 1
-        if isINT:
-            if bericht['result']:
+        if bericht['result']:
+            if isOV:
+                OVNUMMER = main.intOVChek(int(bericht['result'][0]['message']['text']))
+                if OVNUMMER == 'geenInt':
+                    sendMessage('U moet een getal opleveren bestaande alleen uit cijfers.', chat_id)
+                    offset += 1
+                    continue
+                elif OVNUMMER == 'negatief':
+                    sendMessage('U moet een OV kaartnummer opleveren, deze zijn niet negatief.', chat_id)
+                    offset += 1
+                    continue
+                elif OVNUMMER == 'geenOV':
+                    sendMessage('Uw OV is nog niet in gebruik, probeer het met een ander OV die wel in gebruik is.', chat_id)
+                    offset += 1
+                    continue
+                else:
+                    global ovGegeven
+                    ovGegeven = True
+                    return OVNUMMER
+            elif isINT:
                 try:
-                    Nummer = int(bericht['result'][0]['message']['text'])
-                    if Nummer < 0:
-                        sendMessage('U moet een OV kaartnummer opleveren, deze zijn niet negatief.', chat_id)
-                        offset += 1
-                        continue
+                    NUMMER = int(bericht['result'][0]['message']['text'])
+                    return NUMMER
                 except:
                     sendMessage('U moet een getal opleveren bestaande alleen uit cijfers.', chat_id)
                     offset += 1
                     continue
-                if isOV:
-                    if main.kluisCheck(Nummer)[1]:
-                        global ovGegeven
-                        ovGegeven = True
-                        return Nummer
-                    else:
-                        sendMessage('Uw OV is nog niet in gebruik, probeer het met een ander OV die wel in gebruik is.', chat_id)
-                        offset += 1
-                        continue
-                return Nummer
-        else:
-            if bericht['result']:
+            else:
                 return bericht['result'][0]['message']['text']
 
 while True:
