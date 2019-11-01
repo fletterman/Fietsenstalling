@@ -5,7 +5,7 @@ baseurl = "https://api.telegram.org/bot{}/".format(token)
 ovGegeven, update_id, ovNummer = False, None, None
 #de bot is te bereiken met @FietsenZuilBot via telegram
 #zoek "@FietsenZuilBot" op in de search bar.
-#run bot.py op pycharm of op jouw gekozen manier met main.py en fietsenstallingen.json in dezelfde folder.
+#run bot.py op pycharm of op jouw gekozen manier met main.py en fietsensstallingen.json in dezelfde folder.
 #stuur /start naar de bot. De rest spreek voor zichzelf.
 
 def getUpdates(offset=None):
@@ -89,6 +89,7 @@ while True:
             saldo = volgendeBerichtOphalen(chat_id, update_id, 'Wat is uw ov-chipkaart saldo?', True, False)
             resterendeSaldo = saldo - main.huidigePrijs(ovNummer)
             urenOver = resterendeSaldo / main.standaardPrijsUur
+            #in een goed format de tijd naar de gebruiker sturen
             if urenOver > 24:
                 dagenOver = urenOver // 24
                 urenOver = urenOver % 24
@@ -98,6 +99,7 @@ while True:
             else:
                 sendMessage("U komt: {:.2f} euro tekort.".format(abs(resterendeSaldo)), chat_id)
         elif message == '/huidigetijd':
+            #berekenen hoe lang de fiets al gestalt staat.
             if ovGegeven == False:
                 ovNummer = volgendeBerichtOphalen(chat_id, update_id, 'Wat is uw ov-chipkaartnummer?', True, True)
             minuten = main.stalTijd(ovNummer)
@@ -112,6 +114,8 @@ while True:
             elif minuten < 60:
                 sendMessage('Uw fiets staat al {} minuten gestalt.'.format(minuten), chat_id)
         elif ovGegeven == False:
+            #als er iets wordt gestuurd wat geen command is terwijl er nog geen OV is gegeven wordt het volgende bericht naar de gebruiker verstuurd
             sendMessage('Met "/start" (zonder aanhalingstekens) kunt u beginnen.', chat_id)
         else:
+            #als er iets wordt gestuurd wat geen command is terwijl er al wel een ov is gegeven wordt het volgende bericht naar de gebruiker verstuurd
             sendMessage('U kunt uit de volgende commands kiezen:\n1: "/huidigeprijs", hiermee ziet u uw huidige kosten. \n2: "/mijnkluisje", hiermee vindt u uw kluisnummer terug als u die bent vergeten. \n3: "/resterendetijd", hiermee berekent u de resterende tijd dat u uw fiets kan opslaan met uw huidige saldo. \n4: "/huidigetijd", hiermee ziet u hoe lang uw fiets al gestalt staat.', chat_id)
