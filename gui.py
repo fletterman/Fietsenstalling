@@ -38,9 +38,13 @@ def nummerGenerator():
 # Berekent de kosten van de opgegeven kaart als die een kluis in gebruik heeft
 def kostenBerekenen():
     nummer = kostenNummer.get()
-    nummer = int(nummer)
-    kosten = K.huidigePrijs(nummer)
-    kostenLabel["text"] = kosten
+    if isinstance(nummer, str):
+        inleveren = "Geef een cijfer als je kaartnummer en niet een string"
+        kostenLabel["text"] = inleveren
+    else:
+        nummer = int(nummer)
+        kosten = K.huidigePrijs(nummer)
+        kostenLabel["text"] = kosten
 
 # Vraagt om een random gegenereerd getal, controleert of die al een kluis in gebruik heeft en geeft het kaartnummer en het bericht dat uit de functie komt weer
 def nieuweKluis():
@@ -53,22 +57,30 @@ def nieuweKluis():
 # Vraagt om een kaartnummer die gecontroleerd wordt of die een kluis heeft. Als die een kluis heeft wordt de kluis verwijdert, anders gebeurd er niets, en wordt weergegeven wat er gebeurdt is
 def inleverenKluis():
     nummer = inleverenKluisEntry.get()
-    nummer = int(nummer)
-    inleveren = K.kluisInleveren(nummer)
-    inleverenLabel["text"] = inleveren
+    if isinstance(nummer, str):
+        inleveren = "Geef een cijfer als je kaartnummer en niet een string"
+        inleverenLabel["text"] = inleveren
+    else:
+        nummer = int(nummer)
+        inleveren = K.kluisInleveren(nummer)
+        inleverenLabel["text"] = inleveren
 
 # Berekent de verstreken tijd sinds er iets in een kluis is gezet door de kaartnummer
 def tijdBerekenen():
     nummer = tijdAanvraag.get()
-    nummer = int(nummer)
-    tijd = K.stalTijd(nummer)
-    tijdBericht = "U heeft uw kluis al {} minuten in gebruik\n".format(tijd)
-    if isinstance(tijd, str):
-        tijdBericht = "U heeft geen kluis in gebruik\n"
-        tijdLabel["text"] = tijdBericht
+    if isinstance(nummer, str):
+        inleveren = "Geef een cijfer als je kaartnummer en niet een string"
+        tijdLabel["text"] = inleveren
     else:
-        bericht = tijdBericht + "Uw kaartnummer is: " + str(nummer)
-        tijdLabel["text"] = bericht
+        nummer = int(nummer)
+        tijd = K.stalTijd(nummer)
+        tijdBericht = "U heeft uw kluis al {} minuten in gebruik\n".format(tijd)
+        if isinstance(tijd, str):
+            tijdBericht = "U heeft geen kluis in gebruik\n"
+            tijdLabel["text"] = tijdBericht
+        else:
+            bericht = tijdBericht + "Uw kaartnummer is: " + str(nummer)
+            tijdLabel["text"] = bericht
 
 root = Tk()
 
