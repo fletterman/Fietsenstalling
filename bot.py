@@ -38,6 +38,10 @@ def volgendeBerichtOphalen(chat_id, offset, vraag, isINT, isOV):
             if bericht['result']:
                 try:
                     Nummer = int(bericht['result'][0]['message']['text'])
+                    if Nummer < 0:
+                        sendMessage('U moet een OV kaartnummer opleveren, deze zijn niet negatief.', chat_id)
+                        offset += 1
+                        continue
                 except:
                     sendMessage('U moet een getal opleveren bestaande alleen uit cijfers.', chat_id)
                     offset += 1

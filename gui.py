@@ -59,7 +59,7 @@ def inleverenKluis():
     nummer = inleverenKluisEntry.get()
     try:
         nummer = int(nummer)
-        kosten = K.huidigePrijs(nummer)
+        kosten = main.huidigePrijs(nummer)
         inleverenLabel["text"] = kosten
     except:
         inleveren = "Geef een cijfer als je kaartnummer en niet een string"
